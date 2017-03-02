@@ -1,9 +1,16 @@
 #include "ExNihiloPE.h"
 
 //#include "items/Crook.h"
+//#include "items/Hammer.h"
 
-Item* ExNihiloPE::mWoodenCrook;
-Item* ExNihiloPE::mBoneCrook;
+Item* ExNihiloPE::mCrookWood;
+Item* ExNihiloPE::mCrookBone;
+
+Item* ExNihiloPE::mHammerWood;
+Item* ExNihiloPE::mHammerStone;
+Item* ExNihiloPE::mHammerIron;
+Item* ExNihiloPE::mHammerGold;
+Item* ExNihiloPE::mHammerDiamond;
 
 Block* ExNihiloPE::mOakBarrel;
 Block* ExNihiloPE::mUnfiredCrucible;
@@ -11,8 +18,23 @@ Block* ExNihiloPE::mCrucible;
 
 void ExNihiloPE::initItems()
 {
-	Item::mItems[3814] = mWoodenCrook = (new Item("woodenCrook", 3814 - 256))->setIcon("crook_wood", 0)->setCategory(CreativeItemCategory::Tools);
-   Item::mItems[3815] = mBoneCrook = (new Item("boneCrook", 3815 - 256))->setIcon("crook_bone", 0)->setCategory(CreativeItemCategory::Tools);
+
+//Crooks
+	Item::mItems[3814] = mCrookWood = (new Item("crookWood", 3814 - 256))->setIcon("crook_wood", 0)->setCategory(CreativeItemCategory::Tools);
+
+   Item::mItems[3815] = mCrookBone = (new Item("crookBone", 3815 - 256))->setIcon("crook_bone", 0)->setCategory(CreativeItemCategory::Tools);
+
+//Hammers
+
+Item::mItems[3816] = mHammerWood = (new Item("hammerWood", 3816 - 256))->setIcon("hammer_wood", 0)->setCategory(CreativeItemCategory::Tools);
+
+Item::mItems[3817] = mHammerStone = (new Item("hammerStone", 3817 - 256))->setIcon("hammer_stone", 0)->setCategory(CreativeItemCategory::Tools);
+
+Item::mItems[3818] = mHammerIron = (new Item("hammerIron", 3818 - 256))->setIcon("hammer_iron", 0)->setCategory(CreativeItemCategory::Tools);
+
+Item::mItems[3819] = mHammerGold = (new Item("hammerGold", 3819 - 256))->setIcon("hammer_gold", 0)->setCategory(CreativeItemCategory::Tools);
+
+Item::mItems[3820] = mHammerDiamond = (new Item("hammerDiamond", 3820 - 256))->setIcon("hammer_diamond", 0)->setCategory(CreativeItemCategory::Tools);
 }
 
 void ExNihiloPE::initBlocks()
@@ -49,8 +71,9 @@ void ExNihiloPE::initBlockGraphics()
 
 void ExNihiloPE::initCreativeItems()
 {
-	Item::addCreativeItem(3814, 0);
-	Item::addCreativeItem(3815, 0);
+    for(int i = 0; i <= 6; i += 1) {
+	Item::addCreativeItem(3814+i, 0);
+	}
 }
 
 void ExNihiloPE::initCreativeBlocks()

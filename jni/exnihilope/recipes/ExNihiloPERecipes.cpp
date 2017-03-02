@@ -11,10 +11,10 @@ void ExNihiloPERecipes::initRecipes(Recipes *recipes)
 	
 	// Crook
 	pushIngredient(Item::mStick, 'n');
-	addRecipe(ExNihiloPE::mWoodenCrook->itemId, 1, 0, {"nn ", " n ", " n "});
+	addRecipe(ExNihiloPE::mCrookWood->itemId, 1, 0, {"nn ", " n ", " n "});
 
 	pushIngredient(Item::mBone, 'n');
-	addRecipe(ExNihiloPE::mBoneCrook->itemId, 1, 0, {"nn ", " n ", " n "});
+	addRecipe(ExNihiloPE::mCrookBone->itemId, 1, 0, {"nn ", " n ", " n "});
 	
 	/* BLOCKS */
 	// Barrel

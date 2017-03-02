@@ -15,8 +15,14 @@ public:
 	static void initCreativeItems();
 	static void initCreativeBlocks();
 	
-	static Item* mWoodenCrook;
-	static Item* mBoneCrook;
+	static Item* mCrookWood;
+	static Item* mCrookBone;
+
+	static Item* mHammerWood;
+	static Item* mHammerStone;
+	static Item* mHammerIron;
+	static Item* mHammerGold;
+	static Item* mHammerDiamond;
 	
 	static Block* mOakBarrel;
 	static Block* mUnfiredCrucible;
