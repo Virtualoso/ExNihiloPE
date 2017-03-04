@@ -4,10 +4,14 @@
 #include <stdlib.h>
 #include "substrate.h"
 
-#include "minecraftpe/client/locale/Localization.h"
-#include "minecraftpe/world/item/recipes/FurnaceRecipes.h"
-#include "minecraftpe/world/entity/player/Player.h"
-#include "minecraftpe/world/level/BlockSource.h"
+#include "mcpe/client/resources/Localization.h"
+#include "mcpe/recipe/FurnaceRecipes.h"
+#include "mcpe/entity/player/Player.h"
+#include "mcpe/level/BlockSource.h"
+#include "mcpe/client/renderer/BlockTessellator.h"
+#include "mcpe/block/Block.h"
+#include "mcpe/util/BlockPos.h"
+#include "mcpe/util/Vec3.h"
 
 #include "exnihilope/ExNihiloPE.h"
 #include "exnihilope/recipes/ExNihiloPERecipes.h"
@@ -62,6 +66,14 @@ void initBlockGraphics()
 	ExNihiloPE::initBlockGraphics();
 	LOG("Block Graphics Initiated");
 }
+bool (*_tessellateInWorld)(BlockTessellator*tessellator,Block const&block,BlockPos const&pos,uchar aux,bool wtf);
+bool tessellateInWorld(BlockTessellator*tessellator,Block const&block,BlockPos const&pos,uchar aux,bool wtf)
+{ _tessellateInWorld(tessellator,block,pos,aux,wtf);
+
+LOG("Init BlockTessellator");	ExNihiloPE::initBlockTessellator(tessellator,block,pos,aux,wtf);
+	LOG("BlockTessellator Initiated");
+
+}
 
 void (*_initRecipes)(Recipes*);
 void initRecipes(Recipes *self)
@@ -81,14 +93,6 @@ void initFurnaceRecipes(FurnaceRecipes *recipes)
 	LOG("Furnace Recipes Initiated");
 }
 
-bool (*_Player$onLadder)(Player*, bool);
-bool Player$onLadder(Player *self, bool idk)
-{
-	if (self->getRegion().getBlockID(self->getPos().x, self->getPos().y, self->getPos().z) == 237)
-		return true;
-	return _Player$onLadder(self, idk);
-}
-
 void (*_Localization$_load)(Localization*, const std::string&);
 void Localization$_load(Localization *self, const std::string &langCode)
 {
@@ -106,9 +110,9 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 	MSHookFunction((void*) &Item::initCreativeItems, (void*) &initCreativeItems, (void**) &_initCreativeItems);
 	MSHookFunction((void*) &Block::initBlocks, (void*) &initBlocks, (void**) &_initBlocks);
 	MSHookFunction((void*) &BlockGraphics::initBlocks, (void*) &initBlockGraphics, (void**) &_initBlockGraphics);
+   MSHookFunction((void*)((void(BlockTessellator::*)(Block const&,BlockPos const&,unsigned char,bool))&BlockTessellator::tessellateInWorld),(void*)&tessellateInWorld,(void**)&_tessellateInWorld);
 	MSHookFunction((void*) &Recipes::init, (void*) &initRecipes, (void**) &_initRecipes);
 	MSHookFunction((void*) &FurnaceRecipes::_init, (void*) &initFurnaceRecipes, (void**) &_initFurnaceRecipes);
-	//MSHookFunction((void*) &Player::onLadder, (void*) &Player$onLadder, (void**) &_Player$onLadder);
 	MSHookFunction((void*) &Localization::_load, (void*) &Localization$_load, (void**) &_Localization$_load);
 
 	return JNI_VERSION_1_6;

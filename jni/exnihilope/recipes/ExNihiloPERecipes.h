@@ -1,7 +1,7 @@
 #pragma once 
 
-#include "minecraftpe/world/item/recipes/Recipes.h"
-#include "minecraftpe/world/item/recipes/FurnaceRecipes.h"
+#include "mcpe/recipe/Recipes.h"
+#include "mcpe/recipe/FurnaceRecipes.h"
 
 class ExNihiloPERecipes
 { 

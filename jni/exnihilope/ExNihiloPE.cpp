@@ -3,6 +3,8 @@
 //#include "items/Crook.h"
 //#include "items/Hammer.h"
 
+#include "tessellator/BarrelTessellator.h"
+
 Item* ExNihiloPE::mCrookWood;
 Item* ExNihiloPE::mCrookBone;
 
@@ -20,32 +22,32 @@ void ExNihiloPE::initItems()
 {
 
 //Crooks
-	Item::mItems[3814] = mCrookWood = (new Item("crookWood", 3814 - 256))->setIcon("crook_wood", 0)->setCategory(CreativeItemCategory::Tools);
+	Item::mItems[3814] = mCrookWood = (new Item("crookWood", 3814 - 256))->setIcon("crook_wood", 0)->setCategory(CreativeItemCategory::TOOLS);
 
-   Item::mItems[3815] = mCrookBone = (new Item("crookBone", 3815 - 256))->setIcon("crook_bone", 0)->setCategory(CreativeItemCategory::Tools);
+   Item::mItems[3815] = mCrookBone = (new Item("crookBone", 3815 - 256))->setIcon("crook_bone", 0)->setCategory(CreativeItemCategory::TOOLS);
 
 //Hammers
 
-Item::mItems[3816] = mHammerWood = (new Item("hammerWood", 3816 - 256))->setIcon("hammer_wood", 0)->setCategory(CreativeItemCategory::Tools);
+Item::mItems[3816] = mHammerWood = (new Item("hammerWood", 3816 - 256))->setIcon("hammer_wood", 0)->setCategory(CreativeItemCategory::TOOLS);
 
-Item::mItems[3817] = mHammerStone = (new Item("hammerStone", 3817 - 256))->setIcon("hammer_stone", 0)->setCategory(CreativeItemCategory::Tools);
+Item::mItems[3817] = mHammerStone = (new Item("hammerStone", 3817 - 256))->setIcon("hammer_stone", 0)->setCategory(CreativeItemCategory::TOOLS);
 
-Item::mItems[3818] = mHammerIron = (new Item("hammerIron", 3818 - 256))->setIcon("hammer_iron", 0)->setCategory(CreativeItemCategory::Tools);
+Item::mItems[3818] = mHammerIron = (new Item("hammerIron", 3818 - 256))->setIcon("hammer_iron", 0)->setCategory(CreativeItemCategory::TOOLS);
 
-Item::mItems[3819] = mHammerGold = (new Item("hammerGold", 3819 - 256))->setIcon("hammer_gold", 0)->setCategory(CreativeItemCategory::Tools);
+Item::mItems[3819] = mHammerGold = (new Item("hammerGold", 3819 - 256))->setIcon("hammer_gold", 0)->setCategory(CreativeItemCategory::TOOLS);
 
-Item::mItems[3820] = mHammerDiamond = (new Item("hammerDiamond", 3820 - 256))->setIcon("hammer_diamond", 0)->setCategory(CreativeItemCategory::Tools);
+Item::mItems[3820] = mHammerDiamond = (new Item("hammerDiamond", 3820 - 256))->setIcon("hammer_diamond", 0)->setCategory(CreativeItemCategory::TOOLS);
 }
 
 void ExNihiloPE::initBlocks()
 {
 	Block::mBlocks[230] = mOakBarrel = new Block("barrel", 230, Material::getMaterial(MaterialType::WOOD));
-	mOakBarrel->setCategory(CreativeItemCategory::Blocks);
+	mOakBarrel->setCategory(CreativeItemCategory::BLOCKS);
 	//mOakBarrel>setDestroyTime(1.4f);
 	//mOakBarrel->setExplodeable(5.0f);
 
-   Block::mBlocks[231] = mOakBarrel = new Block("crucible", 231, Material::getMaterial(MaterialType::WOOD));
-	mOakBarrel->setCategory(CreativeItemCategory::Blocks);
+   Block::mBlocks[231] = mCrucible = new Block("crucible", 231, Material::getMaterial(MaterialType::STONE));
+	mCrucible->setCategory(CreativeItemCategory::BLOCKS);
 	//mOakBarrel>setDestroyTime(1.4f);
 	//mOakBarrel->setExplodeable(5.0f);
 }
@@ -59,14 +61,23 @@ void ExNihiloPE::initBlockItems()
 
 void ExNihiloPE::initBlockGraphics()
 {
-	BlockGraphics::mBlocks[230] = new BlockGraphics("dirt");
+
+BlockGraphics::mBlocks[230] = new BlockGraphics("glass");
 	BlockGraphics::mBlocks[230]->setTextureItem("planks");
 	BlockGraphics::mBlocks[230]->setSoundType(BlockSoundType::WOOD);
 
 	BlockGraphics::mBlocks[231] = new BlockGraphics("stone");
-	BlockGraphics::mBlocks[231]->setTextureItem("unfired_crucible");
+    BlockGraphics::mBlocks[231]->setBlockShape(BlockShape::CAULDRON);
+	BlockGraphics::mBlocks[231]->setTextureItem("crucible");
 	BlockGraphics::mBlocks[231]->setSoundType(BlockSoundType::STONE);
 	
+}
+
+bool ExNihiloPE:: initBlockTessellator(BlockTessellator*tessellator,Block const&block,BlockPos const&pos,uchar aux,bool wtf) {
+
+if(&block==mOakBarrel)
+		return ((BarrelTessellator*)tessellator)->tessellate(block,pos,aux,wtf);
+
 }
 
 void ExNihiloPE::initCreativeItems()
