@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 
-#include "mcpe/item/ItemInstance.h";
+#include "mcpe/item/ItemInstance.h"
 class Item;
 class Block;
 
