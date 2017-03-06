@@ -3,7 +3,6 @@
 #include "Entity.h"
 
 class Item;
-class Level;
 class MobEffectInstance;
 class PathNavigation;
 class LookControl;
@@ -54,7 +53,6 @@ public:
 	int arrowCount; // 3264
 public:
 	virtual ~Mob();
-	Level& getLevel();
 	virtual void reloadHardcodedClient(Entity::InitializationMethod, VariantParameterList const&);
 	virtual void initializeComponents(Entity::InitializationMethod, VariantParameterList const&);
 	virtual bool hasComponent(std::string const&) const;
