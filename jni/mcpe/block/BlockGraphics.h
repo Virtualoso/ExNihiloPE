@@ -80,8 +80,7 @@ public:
 	void setTextureItem(const std::string&, const std::string&, const std::string&, const std::string&, const std::string&, const std::string&);
 	void setTextures(BlockGraphics&, const Json::Value&);
 
-	//static void initBlocks(ResourcePackManager&);
-	static void initBlocks();
+	static void initBlocks(ResourcePackManager&);
 	static void teardownBlocks();
 	static TextureUVCoordinateSet getTextureUVCoordinateSet(const std::string&, int);
 	static TextureAtlasTextureItem getTextureItem(const std::string&);

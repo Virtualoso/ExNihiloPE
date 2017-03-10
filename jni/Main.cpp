@@ -57,10 +57,10 @@ void initBlocks()
 	LOG("Blocks Initiated");
 }
 
-void (*_initBlockGraphics)();
-void initBlockGraphics()
+void (*_initBlockGraphics)(ResourcePackManager&);
+void initBlockGraphics(ResourcePackManager& rpm)
 {
-	_initBlockGraphics();
+	_initBlockGraphics(rpm);
 
 	LOG("Init Block Graphics");
 	ExNihiloPE::initBlockGraphics();
@@ -110,7 +110,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 	MSHookFunction((void*) &Item::initCreativeItems, (void*) &initCreativeItems, (void**) &_initCreativeItems);
 	MSHookFunction((void*) &Block::initBlocks, (void*) &initBlocks, (void**) &_initBlocks);
 	MSHookFunction((void*) &BlockGraphics::initBlocks, (void*) &initBlockGraphics, (void**) &_initBlockGraphics);
-   MSHookFunction((void*)((void(BlockTessellator::*)(Block const&,BlockPos const&,unsigned char,bool))&BlockTessellator::tessellateInWorld),(void*)&tessellateInWorld,(void**)&_tessellateInWorld);
+	MSHookFunction((void*)((void(BlockTessellator::*)(Block const&,BlockPos const&,unsigned char,bool))&BlockTessellator::tessellateInWorld),(void*)&tessellateInWorld,(void**)&_tessellateInWorld);
 	MSHookFunction((void*) &Recipes::init, (void*) &initRecipes, (void**) &_initRecipes);
 	MSHookFunction((void*) &FurnaceRecipes::_init, (void*) &initFurnaceRecipes, (void**) &_initFurnaceRecipes);
 	MSHookFunction((void*) &Localization::_load, (void*) &Localization$_load, (void**) &_Localization$_load);
