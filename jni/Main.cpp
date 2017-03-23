@@ -14,37 +14,46 @@
 #include "mcpe/util/Vec3.h"
 
 #include "exnihilope/ExNihiloPE.h"
+#include "exnihilope/items/ENItems.h"
 #include "exnihilope/recipes/ExNihiloPERecipes.h"
 
 #define LOG_TAG "ExNihilo-PE"
 #define LOG(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
+
+bool initItems = false;
+
+void (*_loadItems)();
+void loadItems()
+{
+	_loadItems();
+	
+	if(!initItems)
+	{
+		LOG("Init Items");
+		ENItems::init();
+		LOG("Items Initiated");
+		
+		LOG("Init BlockItems");
+		ExNihiloPE::initBlockItems();
+		LOG("BlockItems Initiated");
+		initItems = true;
+	}
+	
+	LOG("Add Items to Creative Inventory");
+	ENItems::initCreativeItems();
+	LOG("Items added to Creative Inventory");
+	
+	LOG("Add Blocks to Creative Inventory");
+	ExNihiloPE::initCreativeBlocks();
+	LOG("Blocks added to Creative Inventory");
+}
 
 void (*_initClientData)();
 void initClientData()
 {
 	_initClientData();
 	
-	LOG("Init Items");
-	ExNihiloPE::initItems();
-	LOG("Items Initiated");
-	
-	LOG("Init BlockItems");
-	ExNihiloPE::initBlockItems();
-	LOG("BlockItems Initiated");
-}
-
-void (*_initCreativeItems)();
-void initCreativeItems()
-{
-	_initCreativeItems();
-	
-	LOG("Add Items to Creative Inventory");
-	ExNihiloPE::initCreativeItems();
-	LOG("Items added to Creative Inventory");
-	
-	LOG("Add Blocks to Creative Inventory");
-	ExNihiloPE::initCreativeBlocks();
-	LOG("Blocks added to Creative Inventory");
+	ENItems::loadResources();
 }
 
 void (*_initBlocks)();
@@ -107,7 +116,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 	LOG("Function Hooking Started");
 	
 	MSHookFunction((void*) &Item::initClientData, (void*) &initClientData, (void**) &_initClientData);
-	MSHookFunction((void*) &Item::initCreativeItems, (void*) &initCreativeItems, (void**) &_initCreativeItems);
+	MSHookFunction((void*) &Item::initCreativeItems, (void*) &loadItems, (void**) &_loadItems);
 	MSHookFunction((void*) &Block::initBlocks, (void*) &initBlocks, (void**) &_initBlocks);
 	MSHookFunction((void*) &BlockGraphics::initBlocks, (void*) &initBlockGraphics, (void**) &_initBlockGraphics);
 	MSHookFunction((void*)((void(BlockTessellator::*)(Block const&,BlockPos const&,unsigned char,bool))&BlockTessellator::tessellateInWorld),(void*)&tessellateInWorld,(void**)&_tessellateInWorld);

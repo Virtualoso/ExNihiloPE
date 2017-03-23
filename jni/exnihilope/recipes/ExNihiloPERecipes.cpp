@@ -10,12 +10,12 @@ void ExNihiloPERecipes::initRecipes(Recipes *recipes)
 	_Instance = recipes;
 	
 	// Crook
-	pushIngredient(Item::mStick, 'n');
+	/*pushIngredient(Item::mStick, 'n');
 	addRecipe(ExNihiloPE::mCrookWood->itemId, 1, 0, {"nn ", " n ", " n "});
 
 	pushIngredient(Item::mBone, 'n');
 	addRecipe(ExNihiloPE::mCrookBone->itemId, 1, 0, {"nn ", " n ", " n "});
-	
+	*/
 	/* BLOCKS */
 	// Barrel
 	pushIngredient(Block::mWoodPlanks, 'n');
