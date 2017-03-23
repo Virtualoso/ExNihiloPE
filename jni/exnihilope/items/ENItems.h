@@ -14,6 +14,7 @@ public:
 
 	static void init();
 	static void initCreativeItems();
+	static void loadResources();
 
 	static int index;
 	static std::vector<int> freeIds;

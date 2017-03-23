@@ -9,6 +9,8 @@ HammerBase* ENItems::hammerDiamond;
 HammerBase* ENItems::hammerGold;
 
 void ENItems::init() {
+	registerItemIds();
+	
 	hammerWood = new HammerBase("hammerWood", 64, Item::Tier::WOOD);
 	hammerWood->setCategory(CreativeItemCategory::TOOLS);
 	
@@ -26,11 +28,19 @@ void ENItems::init() {
 }
 
 void ENItems::initCreativeItems() {
-	Item::addCreativeItem(hammerDiamond, 0);
+	Item::addCreativeItem(hammerWood, 0);
 	Item::addCreativeItem(hammerStone, 0);
 	Item::addCreativeItem(hammerIron, 0);
 	Item::addCreativeItem(hammerDiamond, 0);
 	Item::addCreativeItem(hammerGold, 0);
+}
+
+void ENItems::loadResources() {
+	hammerWood->setIcon("hammerWood", 0);
+	hammerStone->setIcon("hammerStone", 0);
+	hammerIron->setIcon("hammerIron", 0);
+	hammerDiamond->setIcon("hammerDiamond", 0);
+	hammerGold->setIcon("hammerGold", 0);
 }
 
 

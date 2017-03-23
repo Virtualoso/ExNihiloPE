@@ -2,10 +2,9 @@
 
 #include "../ENItems.h"
 
-HammerBase(const std::string& name, int maxUses, Item::Tier material)
-	: ToolItem(name, ENItems::getNextItemId() - 0x100, 0.0F, material, new std::vector<Block*>()) {
+HammerBase::HammerBase(const std::string& name, int maxUses, Item::Tier material)
+	: ToolItem(name, ENItems::getNextItemId() - 0x100, 0.0F, material, {}) {
 
-	setIcon(name, 0);
 	setMaxDamage(maxUses);
 	miningLevel = material.harvestLevel;
 	Item::mItems[itemId] = this;
