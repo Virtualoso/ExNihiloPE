@@ -12,7 +12,7 @@ public:
     ToolItem(const std::string&, short, float, Item::Tier, std::vector<Block*>);
 	virtual int getAttackDamage();
 	virtual bool isHandEquipped() const;
-	virtual std::string appendFormattedHovertext(const ItemInstance&, Level&, std::string&, bool) const;
+	virtual void appendFormattedHovertext(const ItemInstance&, Level&, std::string&, bool) const;
 	virtual bool isValidRepairItem(const ItemInstance&, const ItemInstance&);
 	virtual int getEnchantValue() const;
 	virtual float getDestroySpeed(ItemInstance*, const Block*);

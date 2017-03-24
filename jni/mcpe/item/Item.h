@@ -107,7 +107,7 @@ public:
     virtual bool canDestroyInCreative() const;
     virtual bool isLiquidClipItem(int) const;
     virtual bool requiresInteract() const;
-    virtual std::string appendFormattedHovertext(ItemInstance const&, Level&, std::string&, bool) const;
+    virtual void appendFormattedHovertext(ItemInstance const&, Level&, std::string&, bool) const;
     virtual bool isValidRepairItem(ItemInstance const&, ItemInstance const&);
     virtual int getEnchantSlot() const;
     virtual int getEnchantValue() const;

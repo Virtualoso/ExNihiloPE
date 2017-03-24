@@ -25,8 +25,9 @@ bool ToolItem::isHandEquipped() const {
     return true;
 }
 
-std::string ToolItem::appendFormattedHovertext(const ItemInstance& item, Level& level, std::string& s, bool b) const {
-    return Item::appendFormattedHovertext(item, level, s, b) + "\n\n+5 " + I18n::get("attribute.name.generic.attackDamage"); // todo
+void ToolItem::appendFormattedHovertext(const ItemInstance& item, Level& level, std::string& name, bool b) const {
+    Item::appendFormattedHovertext(item, level, name, b);
+	name += "§9\n\n+5 " + I18n::get("attribute.name.generic.attackDamage"); // todo
 }
 
 bool ToolItem::isValidRepairItem(const ItemInstance& item, const ItemInstance& repairItem) {
