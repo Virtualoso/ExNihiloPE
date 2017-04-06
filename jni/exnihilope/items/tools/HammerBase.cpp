@@ -2,16 +2,16 @@
 
 #include "../ENItems.h"
 
+#include "database/HammerDatabase.h"
+#include "../../registries/HammerRegistry.h"
+
 HammerBase::HammerBase(const std::string& name, int maxUses, Item::Tier material)
 	: ToolItem(name, ENItems::getNextItemId() - 0x100, 0.0F, material, {}) {
 
 	setMaxDamage(maxUses);
 	miningLevel = material.harvestLevel;
 	Item::mItems[itemId] = this;
-}
-
-bool HammerBase::isHammer(const ItemInstance& item) {
-	return true;
+	HammerDatabase::registerHammer(this);
 }
 
 int HammerBase::getMiningLevel(const ItemInstance& item) {
@@ -19,10 +19,9 @@ int HammerBase::getMiningLevel(const ItemInstance& item) {
 }
 
 float HammerBase::getDestroySpeed(ItemInstance* item, const Block* block) {
-	//return HammerRegistry::registered(block) ? efficiencyOnProperMaterial : 1.0F;
-	return 1.0F;
+	return HammerRegistry::registered(block) ? efficiencyOnProperMaterial : 1.0F;
 }
 
 bool HammerBase::canDestroySpecial(Block const* block) const {
-	return false; //HammerRegistry::registered(block);
+	return HammerRegistry::registered(block);
 }

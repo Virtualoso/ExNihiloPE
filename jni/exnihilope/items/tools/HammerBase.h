@@ -10,7 +10,6 @@ public:
 	
 	HammerBase(const std::string&, int, Item::Tier);
 
-	virtual bool isHammer(const ItemInstance&);
 	virtual int getMiningLevel(const ItemInstance&);
 	virtual float getDestroySpeed(ItemInstance*, const Block*);
     virtual bool canDestroySpecial(Block const*) const;

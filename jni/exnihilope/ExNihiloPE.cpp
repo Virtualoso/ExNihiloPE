@@ -2,9 +2,13 @@
 
 #include "tessellator/BarrelTessellator.h"
 
+#include "registries/manager/ExNihiloDefaultRecipes.h"
+
 Block* ExNihiloPE::mOakBarrel;
 Block* ExNihiloPE::mUnfiredCrucible;
 Block* ExNihiloPE::mCrucible;
+
+ExNihiloDefaultRecipes* ExNihiloPE::defaultRecipes;
 
 void ExNihiloPE::initBlocks() {
 	Block::mBlocks[230] = mOakBarrel = new Block("barrel", 230, Material::getMaterial(MaterialType::WOOD));

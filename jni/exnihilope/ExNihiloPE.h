@@ -8,6 +8,8 @@
 #include "mcpe/util/BlockPos.h"
 #include "mcpe/util/Vec3.h"
 
+class ExNihiloDefaultRecipes;
+
 class ExNihiloPE
 {
 public:
@@ -20,5 +22,7 @@ public:
 	static Block* mOakBarrel;
 	static Block* mUnfiredCrucible;
 	static Block* mCrucible;
+
+	static ExNihiloDefaultRecipes* defaultRecipes;
 };
 

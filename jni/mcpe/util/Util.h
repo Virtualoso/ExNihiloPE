@@ -23,4 +23,12 @@ public:
 	static std::string toString(float);
 	static std::string toNiceString(int);
 	static std::string toLower(const std::string &);
+	static int stringToInt(const std::string& number)
+	{
+		std::stringstream stm;
+		stm<<number;
+		int ret;
+		stm>>ret;
+		return ret;
+	}
 };

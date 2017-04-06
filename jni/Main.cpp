@@ -16,6 +16,9 @@
 #include "exnihilope/ExNihiloPE.h"
 #include "exnihilope/items/ENItems.h"
 #include "exnihilope/recipes/ExNihiloPERecipes.h"
+#include "exnihilope/registries/HammerRegistry.h"
+#include "exnihilope/handlers/HandlerHammer.h"
+#include "exnihilope/registries/manager/ExNihiloDefaultRecipes.h"
 
 #define LOG_TAG "ExNihilo-PE"
 #define LOG(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
@@ -36,6 +39,11 @@ void loadItems()
 		LOG("Init BlockItems");
 		ExNihiloPE::initBlockItems();
 		LOG("BlockItems Initiated");
+
+		LOG("Register Hammer Recipes");
+		ExNihiloPE::defaultRecipes = new ExNihiloDefaultRecipes();
+		HammerRegistry::loadJson("HammerRegistry.json");
+		LOG("Hammer Recipes Registered");
 		initItems = true;
 	}
 	
@@ -111,6 +119,14 @@ void Localization$_load(Localization *self, const std::string &langCode)
 		_Localization$_load(self, "exnihilope/" + langCode);
 }
 
+void (*Block$_playerDestroy)(Block*, Player*, const BlockPos&, int);
+void Block$playerDestroy(Block* self, Player* miner, const BlockPos& pos, int aux)
+{
+	if(!HandlerHammer::hammer(self, aux, pos, miner))
+		Block$_playerDestroy(self, miner, pos, aux);
+}
+
+
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) 
 {
 	LOG("Function Hooking Started");
@@ -123,6 +139,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 	MSHookFunction((void*) &Recipes::init, (void*) &initRecipes, (void**) &_initRecipes);
 	MSHookFunction((void*) &FurnaceRecipes::_init, (void*) &initFurnaceRecipes, (void**) &_initFurnaceRecipes);
 	MSHookFunction((void*) &Localization::_load, (void*) &Localization$_load, (void**) &_Localization$_load);
+	MSHookFunction((void*) &Block::playerDestroy, (void*) &Block$playerDestroy, (void**) &Block$_playerDestroy);
 
 	return JNI_VERSION_1_6;
 }
