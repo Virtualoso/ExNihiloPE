@@ -15,15 +15,15 @@
 #include "../registries/HammerRegistry.h"
 
 bool HandlerHammer::hammer(Block* block, int meta, const BlockPos& pos, Player* harvester) {
-	if (harvester->getLevel().isClientSide() || harvester == NULL || EnchantUtils::hasEnchant(16, *(harvester->getSelectedItem()))) // isRemote, valid Player, is silk touching
+	if (harvester->getLevel().isClientSide() || harvester == NULL) // isRemote, valid Player
 		return false;
 
 	ItemInstance* held = harvester->getSelectedItem();
 		
-	if (held == NULL || held->item == NULL || !HammerDatabase::isHammer(held))
+	if (held == NULL || held->item == NULL || EnchantUtils::hasEnchant(16, *held) || !HammerDatabase::isHammer(held))
 		return false;
 
-	std::vector<ItemInstance*> rewards = HammerRegistry::getRewardDrops(harvester->getLevel().getRandom(), block, meta, ((HammerBase*) held->item)->getMiningLevel(*held), EnchantUtils::getEnchantLevel(18, *(harvester->getSelectedItem())));
+	std::vector<ItemInstance*> rewards = HammerRegistry::getRewardDrops(harvester->getLevel().getRandom(), block, meta, ((HammerBase*) held->item)->getMiningLevel(*held), EnchantUtils::getEnchantLevel(18, *held));
 		
 	if (rewards.size() > 0) {
 		for(ItemInstance* item : rewards) {

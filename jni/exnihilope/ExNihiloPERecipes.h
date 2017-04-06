@@ -6,8 +6,8 @@
 class ExNihiloPERecipes
 { 
 public: 
-	static void initRecipes(Recipes *recipes);
-	static void initFurnaceRecipes(FurnaceRecipes *recipes);
+	static void initRecipes(Recipes* recipes);
+	static void initFurnaceRecipes(FurnaceRecipes* recipes);
 	
 private: 	
 	static Recipes* _Instance;

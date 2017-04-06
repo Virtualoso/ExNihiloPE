@@ -15,7 +15,7 @@
 
 #include "exnihilope/ExNihiloPE.h"
 #include "exnihilope/items/ENItems.h"
-#include "exnihilope/recipes/ExNihiloPERecipes.h"
+#include "exnihilope/ExNihiloPERecipes.h"
 #include "exnihilope/registries/HammerRegistry.h"
 #include "exnihilope/handlers/HandlerHammer.h"
 #include "exnihilope/registries/manager/ExNihiloDefaultRecipes.h"
