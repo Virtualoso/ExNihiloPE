@@ -1,2 +1,2 @@
 # ExNihiloPE
-MCPE Addon port of ExNihilo
+MCPE Addon port of Ex Nihilo Adscensio
