@@ -2,6 +2,7 @@
 
 #include "RegistryManager.h"
 #include "../HammerRegistry.h"
+#include "../../blocks/ENBlocks.h"
 
 #include "mcpe/block/Block.h"
 #include "mcpe/item/ItemInstance.h"
@@ -26,10 +27,9 @@ void ExNihiloDefaultRecipes::registerSieveRecipeDefaults() {
 void ExNihiloDefaultRecipes::registerHammerRecipeDefaults() {
 	HammerRegistry::registerRecipe(Block::mCobblestone, 0, new ItemInstance(Block::mGravel, 1), 0, 1.0F, 0.0F);
 	HammerRegistry::registerRecipe(Block::mGravel, 0, new ItemInstance(Block::mSand, 1), 0, 1.0F, 0.0F);
-	/*HammerRegistry::register(Block::SAND.getDefaultState(), new ItemStack(ENBlock::dust, 1), 0, 1.0F, 0.0F);
-	HammerRegistry::register(Block::NETHERRACK.getDefaultState(), new ItemStack(ENBlock::netherrackCrushed, 1), 0, 1.0F, 0.0F);
-	HammerRegistry::register(Block::END_STONE.getDefaultState(), new ItemStack(ENBlock::endstoneCrushed, 1), 0, 1.0F, 0.0F);*/
-	// todo when adding new items and blocks
+	HammerRegistry::registerRecipe(Block::mSand, 0, new ItemInstance(ENBlocks::dust, 1), 0, 1.0F, 0.0F);
+	HammerRegistry::registerRecipe(Block::mNetherrack, 0, new ItemInstance(ENBlocks::netherrackCrushed, 1), 0, 1.0F, 0.0F);
+	HammerRegistry::registerRecipe(Block::mEndStone, 0, new ItemInstance(ENBlocks::endstoneCrushed, 1), 0, 1.0F, 0.0F);
 }
 
 void ExNihiloDefaultRecipes::registerCompostRecipeDefaults() {
