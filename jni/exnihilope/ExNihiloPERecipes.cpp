@@ -1,6 +1,6 @@
 #include "ExNihiloPERecipes.h"
 
-#include "ExNihiloPE.h"
+#include "blocks/ENBlocks.h"
 #include "items/ENItems.h"
 #include "items/tools/HammerBase.h"
 
@@ -44,7 +44,7 @@ void ExNihiloPERecipes::initRecipes(Recipes *recipes) {
 	// Barrel
 	pushIngredient(Block::mWoodPlanks, 'n');
 	pushIngredient(Block::mWoodenSlab, 'm');
-	addRecipe(ExNihiloPE::mOakBarrel->blockId, 1, 0, {"n n", "n n", "nmn"});
+	addRecipe(ENBlocks::barrelWood->blockId, 1, 0, {"n n", "n n", "nmn"});
 
 }
 

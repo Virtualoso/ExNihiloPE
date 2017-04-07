@@ -20,7 +20,7 @@ bool HandlerHammer::hammer(Block* block, int meta, const BlockPos& pos, Player* 
 
 	ItemInstance* held = harvester->getSelectedItem();
 		
-	if (held == NULL || held->item == NULL || EnchantUtils::hasEnchant(16, *held) || !HammerDatabase::isHammer(held))
+	if (held == NULL || held->item == NULL || EnchantUtils::hasEnchant(16, *held) || !HammerDatabase::isHammer(held)) // is item invalid, is silktouching, is not hammer
 		return false;
 
 	std::vector<ItemInstance*> rewards = HammerRegistry::getRewardDrops(harvester->getLevel().getRandom(), block, meta, ((HammerBase*) held->item)->getMiningLevel(*held), EnchantUtils::getEnchantLevel(18, *held));
