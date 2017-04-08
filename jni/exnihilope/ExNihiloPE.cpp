@@ -4,6 +4,7 @@
 #include "items/ENItems.h"
 #include "registries/manager/ExNihiloDefaultRecipes.h"
 #include "registries/HammerRegistry.h"
+#include "registries/CrookRegistry.h"
 #include "tessellator/BarrelTessellator.h"
 
 ExNihiloDefaultRecipes* ExNihiloPE::defaultRecipes;
@@ -15,6 +16,7 @@ void ExNihiloPE::init() {
 	defaultRecipes = new ExNihiloDefaultRecipes();
 
 	HammerRegistry::loadJson("HammerRegistry.json");
+	CrookRegistry::loadJson("CrookRegistry.json");
 }
 
 void ExNihiloPE::initCreative() {

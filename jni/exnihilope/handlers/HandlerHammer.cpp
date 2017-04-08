@@ -1,7 +1,6 @@
 #include "HandlerHammer.h"
 
 #include <vector>
-#include <sstream>
 
 #include "mcpe/item/ItemInstance.h"
 #include "mcpe/item/Item.h"

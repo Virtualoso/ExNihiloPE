@@ -18,6 +18,7 @@
 #include "exnihilope/blocks/ENBlocks.h"
 #include "exnihilope/ExNihiloPERecipes.h"
 #include "exnihilope/handlers/HandlerHammer.h"
+#include "exnihilope/handlers/HandlerCrook.h"
 
 #define LOG_TAG "ExNihilo-PE"
 #define LOG(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
@@ -87,7 +88,7 @@ void Localization$_load(Localization *self, const std::string &langCode) {
 
 void (*Block$_playerDestroy)(Block*, Player*, const BlockPos&, int);
 void Block$playerDestroy(Block* self, Player* miner, const BlockPos& pos, int aux) {
-	if(!HandlerHammer::hammer(self, aux, pos, miner))
+	if(!HandlerHammer::hammer(self, aux, pos, miner) && !HandlerCrook::crook(self, aux, pos, miner))
 		Block$_playerDestroy(self, miner, pos, aux);
 }
 

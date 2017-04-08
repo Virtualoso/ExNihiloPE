@@ -3,6 +3,7 @@
 #include <vector>
 
 class HammerBase;
+class CrookBase;
 
 class ENItems {
 public:
@@ -11,6 +12,9 @@ public:
 	static HammerBase* hammerIron;
 	static HammerBase* hammerDiamond;
 	static HammerBase* hammerGold;
+
+	static CrookBase* crookWood;
+	static CrookBase* crookBone;
 
 	static void init();
 	static void initCreativeItems();

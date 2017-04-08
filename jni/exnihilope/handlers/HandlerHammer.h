@@ -2,7 +2,6 @@
 
 class Block;
 class Player;
-class ItemInstance;
 class BlockPos;
 
 class HandlerHammer {

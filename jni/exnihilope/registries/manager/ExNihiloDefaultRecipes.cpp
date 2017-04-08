@@ -2,7 +2,9 @@
 
 #include "RegistryManager.h"
 #include "../HammerRegistry.h"
+#include "../CrookRegistry.h"
 #include "../../blocks/ENBlocks.h"
+#include "../../util/BlockInfo.h"
 
 #include "mcpe/block/Block.h"
 #include "mcpe/item/ItemInstance.h"
@@ -37,7 +39,8 @@ void ExNihiloDefaultRecipes::registerCompostRecipeDefaults() {
 }
 
 void ExNihiloDefaultRecipes::registerCrookRecipeDefaults () {
-	// todo when adding crooks
+	//CrookRegistry::register(new BlockInfo(Block::mLeaves, -1), ItemResource::getResourceStack(ItemResource::SILKWORM), 0.1f, 0f);
+	//CrookRegistry::register(new BlockInfo(Block::mLeaves2, -1), ItemResource::getResourceStack(ItemResource::SILKWORM), 0.1f, 0f);
 }
 
 void ExNihiloDefaultRecipes::registerCrucibleRecipeDefaults () {
