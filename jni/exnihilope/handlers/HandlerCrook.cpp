@@ -32,7 +32,7 @@ bool HandlerCrook::crook(Block* block, int meta, const BlockPos& pos, Player* ha
 			}
 		}
 	}
-	else if (block == Block::mLeaves || block == Block::mLeaves2) { //Simulate vanilla drops
+	if (block == Block::mLeaves || block == Block::mLeaves2) { //Simulate vanilla drops
 		for (int i = 0 ; i < 4; i++) { // todo config
 			block->spawnResources(harvester->getRegion(), pos, meta, 1.0F, fortune);
 		}

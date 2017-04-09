@@ -4,6 +4,7 @@
 
 class HammerBase;
 class CrookBase;
+class ItemResource;
 
 class ENItems {
 public:
@@ -15,6 +16,8 @@ public:
 
 	static CrookBase* crookWood;
 	static CrookBase* crookBone;
+
+	static ItemResource* resources;
 
 	static void init();
 	static void initCreativeItems();

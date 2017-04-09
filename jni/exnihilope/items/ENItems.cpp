@@ -2,6 +2,7 @@
 
 #include "tools/HammerBase.h"
 #include "tools/CrookBase.h"
+#include "ItemResource.h"
 
 HammerBase* ENItems::hammerWood;
 HammerBase* ENItems::hammerStone;
@@ -11,6 +12,8 @@ HammerBase* ENItems::hammerGold;
 
 CrookBase* ENItems::crookWood;
 CrookBase* ENItems::crookBone;
+
+ItemResource* ENItems::resources;
 
 void ENItems::init() {
 	registerItemIds();
@@ -35,6 +38,8 @@ void ENItems::init() {
 		
 	crookBone = new CrookBase("crookBone", 256);
 	crookBone->setCategory(CreativeItemCategory::TOOLS);
+
+	resources = new ItemResource();
 }
 
 void ENItems::initCreativeItems() {
@@ -45,6 +50,9 @@ void ENItems::initCreativeItems() {
 	Item::addCreativeItem(hammerGold, 0);
 	Item::addCreativeItem(crookWood, 0);
 	Item::addCreativeItem(crookBone, 0);
+
+	for (int i = 1; i < 6; i++)
+		Item::addCreativeItem(resources, i);
 }
 
 void ENItems::loadResources() {
@@ -55,6 +63,7 @@ void ENItems::loadResources() {
 	hammerGold->setIcon("hammerGold", 0);
 	crookWood->setIcon("crookWood", 0);
 	crookBone->setIcon("crookBone", 0);
+	resources->setIcon("itemPebble", 0);
 }
 
 

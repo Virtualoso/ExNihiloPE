@@ -5,6 +5,7 @@
 #include "../CrookRegistry.h"
 #include "../../blocks/ENBlocks.h"
 #include "../../util/BlockInfo.h"
+#include "../../items/ItemResource.h"
 
 #include "mcpe/block/Block.h"
 #include "mcpe/item/ItemInstance.h"
@@ -39,8 +40,8 @@ void ExNihiloDefaultRecipes::registerCompostRecipeDefaults() {
 }
 
 void ExNihiloDefaultRecipes::registerCrookRecipeDefaults () {
-	//CrookRegistry::register(new BlockInfo(Block::mLeaves, -1), ItemResource::getResourceStack(ItemResource::SILKWORM), 0.1f, 0f);
-	//CrookRegistry::register(new BlockInfo(Block::mLeaves2, -1), ItemResource::getResourceStack(ItemResource::SILKWORM), 0.1f, 0f);
+	CrookRegistry::registerRecipe(new BlockInfo(Block::mLeaves, -1), ItemResource::getResourceStack(ItemResource::SILKWORM), 0.1F, 0.0F);
+	CrookRegistry::registerRecipe(new BlockInfo(Block::mLeaves2, -1), ItemResource::getResourceStack(ItemResource::SILKWORM), 0.1F, 0.0F);
 }
 
 void ExNihiloDefaultRecipes::registerCrucibleRecipeDefaults () {
