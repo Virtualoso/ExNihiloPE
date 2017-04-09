@@ -2,7 +2,10 @@
 
 #include "blocks/ENBlocks.h"
 #include "items/ENItems.h"
+#include "items/ItemResource.h"
+#include "items/ItemCookedSilkworm.h"
 #include "items/tools/HammerBase.h"
+#include "items/tools/CrookBase.h"
 
 #include "mcpe/block/Block.h"
 #include "mcpe/item/Item.h"
@@ -34,12 +37,12 @@ void ExNihiloPERecipes::initRecipes(Recipes *recipes) {
 	addRecipe(ENItems::hammerDiamond->itemId, 1, 0, { " x ", " yx", "y  "});
 
 	// Crook
-	/*pushIngredient(Item::mStick, 'n');
-	addRecipe(ExNihiloPE::mCrookWood->itemId, 1, 0, {"nn ", " n ", " n "});
+	pushIngredient(Item::mStick, 'n');
+	addRecipe(ENItems::crookWood->itemId, 1, 0, {"nn", " n", " n"});
 
 	pushIngredient(Item::mBone, 'n');
-	addRecipe(ExNihiloPE::mCrookBone->itemId, 1, 0, {"nn ", " n ", " n "});
-	*/
+	addRecipe(ENItems::crookBone->itemId, 1, 0, {"nn", " n", " n"});
+	
 	/* BLOCKS */
 	// Barrel
 	pushIngredient(Block::mWoodPlanks, 'n');
@@ -49,7 +52,7 @@ void ExNihiloPERecipes::initRecipes(Recipes *recipes) {
 }
 
 void ExNihiloPERecipes::initFurnaceRecipes(FurnaceRecipes *recipes) {
-
+	recipes->addFurnaceRecipeAuxData(ENItems::resources->itemId, 2, ItemInstance(ENItems::cookedSilkworm->itemId, 1, 0));
 }
 
 void ExNihiloPERecipes::pushIngredient(Item *item, char letter) {

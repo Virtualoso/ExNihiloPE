@@ -5,6 +5,7 @@
 class HammerBase;
 class CrookBase;
 class ItemResource;
+class ItemCookedSilkworm;
 
 class ENItems {
 public:
@@ -18,6 +19,7 @@ public:
 	static CrookBase* crookBone;
 
 	static ItemResource* resources;
+	static ItemCookedSilkworm* cookedSilkworm;
 
 	static void init();
 	static void initCreativeItems();
