@@ -65,6 +65,8 @@ bool ItemResource::useOn(ItemInstance& stack, Entity& player, int x, int y, int 
 TextureUVCoordinateSet const& ItemResource::getIcon(int meta, int i2, bool b) const {
 	if (meta < 6)
 		((Item*) this)->setIcon(textures[meta], 0);
+	else
+		((Item*) this)->setIcon(textures[0], 0);
 	
 	return Item::getIcon(meta, i2, b);
 }
