@@ -8,6 +8,7 @@ public:
     static Block* netherrackCrushed;
     static Block* endstoneCrushed;
 	static Block* barrelWood;
+	static Block* infestedLeaves;
 	static Block* crucible;
 
 	static void init();

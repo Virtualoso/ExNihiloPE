@@ -6,11 +6,13 @@
 #include "mcpe/block/BlockShape.h"
 
 #include "BlockBaseFalling.h"
+#include "BlockInfestedLeaves.h"
 
 Block* ENBlocks::dust;
 Block* ENBlocks::netherrackCrushed;
 Block* ENBlocks::endstoneCrushed;
 Block* ENBlocks::barrelWood;
+Block* ENBlocks::infestedLeaves;
 Block* ENBlocks::crucible;
 
 void ENBlocks::init() {
@@ -31,6 +33,9 @@ void ENBlocks::init() {
 	//barrelWood->setDestroyTime(1.4f);
 	//barrelWood->setExplodeable(5.0f);
 
+	Block::mBlocks[176] = infestedLeaves = new BlockInfestedLeaves(176);
+	infestedLeaves->setCategory(CreativeItemCategory::DECORATIONS);
+
 	Block::mBlocks[242] = crucible = new Block("blockCrucible", 242, Material::getMaterial(MaterialType::STONE));
 	crucible->setCategory(CreativeItemCategory::BLOCKS);
 	//barrelWood->setDestroyTime(1.4f);
@@ -44,6 +49,7 @@ void ENBlocks::initBlockItems() {
 	Item::mItems[253] = new BlockItem(netherrackCrushed->getDescriptionId(), 253 - 256);
 	Item::mItems[254] = new BlockItem(endstoneCrushed->getDescriptionId(), 254 - 256);
 	Item::mItems[230] = new BlockItem(barrelWood->getDescriptionId(), 230 - 256);
+	Item::mItems[176] = new BlockItem(infestedLeaves->getDescriptionId(), 176 - 256);
 	Item::mItems[242] = new BlockItem(crucible->getDescriptionId(), 242 - 256);
 }
 
@@ -63,6 +69,12 @@ void ENBlocks::initGraphics() {
 	BlockGraphics::mBlocks[230] = new BlockGraphics("glass");
 	BlockGraphics::mBlocks[230]->setTextureItem("planks");
 	BlockGraphics::mBlocks[230]->setSoundType(BlockSoundType::WOOD);
+	
+	BlockGraphics::mBlocks[176] = new BlockGraphics("leaves");
+	BlockGraphics::mBlocks[176]->setTextureItem("leaves");
+	BlockGraphics::mBlocks[176]->setCarriedTextureItem("leaves_carried");
+	BlockGraphics::mBlocks[176]->brightnessGamma = 0.80F;
+	BlockGraphics::mBlocks[176]->setSoundType(BlockSoundType::GRASS);
 
 	BlockGraphics::mBlocks[242] = new BlockGraphics("stone");
     BlockGraphics::mBlocks[242]->setBlockShape(BlockShape::CAULDRON);
@@ -75,6 +87,6 @@ void ENBlocks::initCreativeBlocks() {
 	Item::addCreativeItem(253, 0);
 	Item::addCreativeItem(254, 0);
 	Item::addCreativeItem(230, 0);
+	Item::addCreativeItem(176, 0);
 	Item::addCreativeItem(242, 0);
 }
-

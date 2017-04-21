@@ -17,6 +17,6 @@ public:
 	BlockPos(const ChunkPos &, int);
 	BlockPos(const Vec3 &);
 	BlockPos(float, float, float);
-	void neighbor(signed char) const;
-	void relative(signed char, int) const;
+	BlockPos& neighbor(signed char) const;
+	BlockPos& relative(signed char, int) const;
 };

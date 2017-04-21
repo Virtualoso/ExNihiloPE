@@ -7,7 +7,9 @@
 #include "Block.h"
 #include "BlockShape.h"
 #include "BlockSoundType.h"
-#include "../client/renderer/texture/TextureAtlasTextureItem.h"
+#include "../client/renderer/texture/TextureAtlasItem.h"
+#include "../util/Color.h"
+#include "../util/AABB.h"
 
 class BlockSource;
 class BlockPos;
@@ -21,8 +23,21 @@ namespace Json { class Value; }
 class BlockGraphics 
 {
 public:
-	void**vtable;
-	char filler[500];
+	unsigned char id; // 4
+	Block* block; // 8
+	unsigned int isotropicTextureFace; // 12
+	int unknown; // 16
+	BlockShape blockShape; // 20
+	bool idk; // 24
+	float brightnessGamma; // 28
+	Color mapColor;
+	bool fancy;
+	BlockSoundType soundType;
+    AABB visualShape;
+    TextureAtlasItem texture[6];
+    TextureAtlasItem carriedTexture[6];
+    std::string textureName[6];
+    std::string carriedTextureName[6];
 
 	static std::shared_ptr<TextureAtlas> mTerrainTextureAtlas;
 	static std::vector<std::unique_ptr<BlockGraphics>> mOwnedBlocks;
@@ -83,5 +98,5 @@ public:
 	static void initBlocks(ResourcePackManager&);
 	static void teardownBlocks();
 	static TextureUVCoordinateSet getTextureUVCoordinateSet(const std::string&, int);
-	static TextureAtlasTextureItem getTextureItem(const std::string&);
+	static TextureAtlasItem getTextureItem(const std::string&);
 };

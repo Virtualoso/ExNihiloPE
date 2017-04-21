@@ -2,14 +2,12 @@
 
 #include "Block.h"
 
-// Size : 144
-class TransparentBlock : public Block
-{
+// Size : 120
+class TransparentBlock : public Block {
 public:
-	bool b1;	// 140
+	bool shouldRender;	// 120
 
-public:
-	TransparentBlock(std::string const &, int, std::string const &, Material const &, bool);
+	TransparentBlock(const std::string&, int, const Material&, bool);
 	virtual ~TransparentBlock();
-	virtual void shouldRenderFace(BlockSource &, BlockPos const &, signed char, AABB const &) const;
+	virtual bool shouldRenderFace(BlockSource&, BlockPos const&, signed char, AABB const&) const;
 };

@@ -34,33 +34,30 @@ struct Color;
 
 typedef unsigned char uchar;
 
-class Block
-{
+class Block {
 public:
-	//unknow fields,just keep 0.16's
 	uint8_t blockId; // 4
-	std::string name; // 12
-	bool replaceable;
-	int renderLayer; // 52
-	bool canBuildOver; // 49
-	BlockShape blockShape; // 56
-	int properties; // 60
-	int blockEntityType; // 64
-	bool animates; // 68
-	float thickness; // 72
-	bool slippery; // 76
-	bool instaTicks; // 77
-	float gravity; // 80
-	Material &material; // 84
-	Color mapColor; // 88
-	float friction; // 104
-	bool heavy; // 108
-	float hardness; // 112
-	float explosionResistance; // 116
-	CreativeItemCategory creativeCategory; // 120
-	AABB hitbox; // 124
-	char filler[24];
-
+	std::string name; // 8
+	std::string simpleName; // 12
+	bool fancy; // 16
+	bool canBuildOver; // 17
+	int renderLayer; // 20
+	int properties; // 24
+	BlockEntityType blockEntityType; // 28
+	bool animates; // 32
+	float unknown; // 36
+	float thickness; // 40
+	bool slippery; // 44
+	bool instaTicks; // 45
+	float gravity; // 48
+	Material& material; // 52
+	Color mapColor; // 56
+	float friction; // 72
+	bool heavy; // 76
+	float hardness; // 80
+	float explosionResistance; // 84
+	CreativeItemCategory creativeCategory; // 88
+	AABB hitbox; // 92
 
 	static std::vector<std::unique_ptr<Block>> mOwnedBlocks;
 	static Block* mBlocks[256];
@@ -71,9 +68,6 @@ public:
 	static bool mShouldTick[256];
 
 	Block(const std::string&, int, const Material&);
-
-	/* vtable */
-	
 	virtual ~Block();
 	virtual void tick(BlockSource&, BlockPos const&, Random&) const;
 	virtual AABB const& getCollisionShape(AABB&, BlockSource&, BlockPos const&, Entity*) const;
@@ -130,7 +124,7 @@ public:
 	virtual AABB const& getSecondPart(BlockSource&, BlockPos const&, BlockPos&) const;
 	virtual int getResource(Random&, int, int) const;
 	virtual int getResourceCount(Random&, int, int) const;
-	virtual void asItemInstance(BlockSource&, BlockPos const&, int) const;
+	virtual ItemInstance asItemInstance(BlockSource&, BlockPos const&, int) const;
 	virtual void spawnResources(BlockSource&, BlockPos const&, int, float, int) const;
 	virtual void spawnBurnResources(BlockSource&, float, float, float);
 	virtual float getExplosionResistance(Entity*) const;
@@ -163,7 +157,7 @@ public:
 	virtual int getColor(BlockSource&, BlockPos const&, unsigned char) const;
 	virtual int getColorForParticle(BlockSource&, BlockPos const&, int) const;
 	virtual bool isSeasonTinted(BlockSource&, BlockPos const&) const;
-	virtual void onGraphicsModeChanged(bool, bool, bool);
+	virtual Block* onGraphicsModeChanged(bool, bool, bool);
 	virtual int getRenderLayer(BlockSource&, BlockPos const&) const;
 	virtual int getExtraRenderLayers() const;
 	virtual const AABB& getVisualShape(BlockSource&, BlockPos const&, AABB&, bool) const;
