@@ -9,17 +9,12 @@
 #include "mcpe/block/Block.h"
 
 BlockInfestedLeaves::BlockInfestedLeaves(int id) : EntityBlock("blockInfestedLeaves", id, Material::getMaterial(MaterialType::PLANT)) {
-	leavesFancy = true;
 	setSolid(false);
 	setPushesOutItems(true);
-	renderLayer = 8;
+	renderLayer = 5;
 	unknown = 0.8F;
 	properties |= 0x2000020;
 	blockEntityType = BlockEntityType::None;
-}
-
-int BlockInfestedLeaves::getRenderLayer(BlockSource& region, const BlockPos& pos) const {
-	return Block::mLeaves->getRenderLayer(region, pos);
 }
 
 void BlockInfestedLeaves::infestLeafBlock(BlockSource& world, const BlockPos& pos) {
@@ -53,18 +48,7 @@ int BlockInfestedLeaves::getColor(BlockSource& region, const BlockPos& pos, unsi
 }
 
 bool BlockInfestedLeaves::isSeasonTinted(BlockSource& region, const BlockPos& pos) const {
-	return Block::mLeaves->isSeasonTinted(region, pos);
-}
-
-bool BlockInfestedLeaves::shouldRenderFace(BlockSource& region, const BlockPos& pos, signed char side, const AABB& aabb) const {
-	return !leavesFancy && region.getBlock(pos) == this ? false : Block::shouldRenderFace(region, pos, side, aabb);
-}
-
-Block* BlockInfestedLeaves::onGraphicsModeChanged(bool fancyGfx, bool idk_b, bool fancyLeaves) {
-	leavesFancy = fancyLeaves;
-	renderLayer = fancyLeaves ? 8 : 3;
-	mLightBlock[blockId] = 1;
-	return Block::onGraphicsModeChanged(fancyGfx, idk_b, fancyLeaves);
+	return true;
 }
 
 void BlockInfestedLeaves::playerDestroy(Player* harvester, const BlockPos& pos, int aux) const {
