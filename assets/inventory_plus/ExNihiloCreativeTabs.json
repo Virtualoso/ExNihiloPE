@@ -1,0 +1,74 @@
+{
+  "tabs": [
+	{
+	  "override_creative": true,
+	  "tab_icon": {
+		"name": "hammerIron"
+	  },
+	  "items": [
+		{
+		  "name": "hammerWood"
+		},
+		{
+		  "name": "hammerStone"
+		},
+		{
+		  "name": "hammerGold"
+		},
+		{
+		  "name": "hammerIron"
+		},
+		{
+		  "name": "hammerDiamond"
+		},
+		{
+		  "name": "crookWood"
+		},
+		{
+		  "name": "crookBone"
+		},
+		{
+		  "name": "itemMaterial",
+		  "data": 1
+		},
+		{
+		  "name": "itemMaterial",
+		  "data": 2
+		},
+		{
+		  "name": "itemMaterial",
+		  "data": 3
+		},
+		{
+		  "name": "itemMaterial",
+		  "data": 4
+		},
+		{
+		  "name": "itemMaterial",
+		  "data": 5
+		},
+		{
+		  "name": "silkwormCooked"
+		},
+		{
+		  "name": "blockDust"
+		},
+		{
+		  "name": "blockNetherrackCrushed"
+		},
+		{
+		  "name": "blockEndstoneCrushed"
+		},
+		{
+		  "name": "blockBarrel0"
+		},
+		{
+		  "name": "blockCrucible"
+		},
+		{
+		  "name": "blockInfestedLeaves"
+		}
+	  ]
+	}
+  ]
+}
