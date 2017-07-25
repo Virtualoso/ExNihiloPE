@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "mcpe/util/Random.h"
+#include "../../util/Random.h"
 
 class EquipmentFilter;
 class BlockSource;
@@ -12,6 +12,7 @@ class EntityDamageSource;
 class EnchantmentInstance;
 class Item;
 class Vec3;
+class ItemEnchants;
 
 class EnchantUtils
 {

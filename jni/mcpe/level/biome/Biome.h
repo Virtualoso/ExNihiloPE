@@ -1,108 +1,90 @@
 #pragma once
 
-class BiomeDecorator;
+#include <string>
+#include <memory>
+
+#include "../../entity/EntityType.h"
+
+class Feature;
 class Random;
 class BlockPos;
 class BlockSource;
-class LevelChunk;
+class BlockVolume;
+class LevelStorage;
+class BiomeDecorator;
 
-class Biome
-{
-public:
-	enum BiomeType
-	{
-
-	};
+class Biome {
 
 public:
-	static Biome *beaches;
-	static Biome *birchForest;
-	static Biome *birchForestHills;
-	static Biome *birchForestHillsMutated;
-	static Biome *birchForestMutated;
-	static Biome *coldBeach;
-	static Biome *deepOcean;
-	static Biome *desert;
-	static Biome *desertHills;
-	static Biome *desertMutated;
-	static Biome *extremeHills;
-	static Biome *extremeHillsMutated;
-	static Biome *extremeHillsWithTrees;
-	static Biome *extremeHillsWithTreesMutated;
-	static Biome *forest;
-	static Biome *forestHills;
-	static Biome *forestMutated;
-	static Biome *frozenOcean;
-	static Biome *frozenRiver;
-	static Biome *hell;
-	static Biome *iceFlats;
-	static Biome *iceFlatsMutated;
-	static Biome *iceMountains;
-	static Biome *jungle;
-	static Biome *jungleEdge;
-	static Biome *jungleEdgeMutated;
-	static Biome *jungleHills;
-	static Biome *jungleMutated;
-	static Biome *mesa;
-	static Biome *mesaClearRock;
-	static Biome *mesaClearRockMutated;
-	static Biome *mesaMutated;
-	static Biome *mesaRock;
-	static Biome *mesaRockMutated;
-	static Biome *mushroomIsland;
-	static Biome *mushroomIslandShore;
-	static Biome *ocean;
-	static Biome *plains;
-	static Biome *plainsMutated;
-	static Biome *redwoodTaiga;
-	static Biome *redwoodTaigaHills;
-	static Biome *redwoodTaigaHillsMutated;
-	static Biome *redwoodTaigaMutated;
-	static Biome *river;
-	static Biome *roofedForest;
-	static Biome *roofedForestMutated;
-	static Biome *savanna;
-	static Biome *savannaMutated;
-	static Biome *savannaRock;
-	static Biome *savannaRockMutated;
-	static Biome *sky;
-	static Biome *smallerExtremeHills;
-	static Biome *stoneBeach;
-	static Biome *swampland;
-	static Biome *swamplandMutated;
-	static Biome *taiga;
-	static Biome *taigaCold;
-	static Biome *taigaColdHills;
-	static Biome *taigaColdMutated;
-	static Biome *taigaHills;
-	static Biome *taigaMutated;
 
-public:
-	static Biome *mBiomes[61];
-	char filler[156];
-public:
-	Biome(int, Biome::BiomeType, BiomeDecorator *);
-	Biome(){}
-	virtual void setColor(int);
-	virtual void setColor(int, bool);
-	virtual ~Biome();
-	virtual void getTreeFeature(Random *);
-	virtual void getGrassFeature(Random *);
-	virtual void getTemperature();
-	virtual void adjustScale(float);
-	virtual void adjustDepth(float);
-	virtual void getSkyColor(float);
-	virtual void getCreatureProbability();
-	virtual void getFoliageColor();
-	virtual void getRandomFlowerTypeAndData(Random &, BlockPos const &);
-	virtual void decorate(BlockSource *, Random &, BlockPos const &, bool, float);
-	virtual void buildSurfaceAt(Random &, LevelChunk &, BlockPos const &, float,short);
-	virtual void getGrassColor(BlockPos const &);
-	virtual void refreshBiome(unsigned int);
-	virtual void getTemperatureCategory() const;
-	virtual void isSame(Biome *);
-	virtual void isHumid();
-	virtual void createMutatedCopy(int);
-public:
-	static void initBiomes();
+    struct BiomeHeight {
+        float depth;
+        float scale;
+    };
+    
+    // TODO: Need testing
+    enum class BiomeType : int { Beach, Desert, ExtremeHills, Flat, Forest, Hell, Ice, Jungle, Mesa, MushroomIsland, Ocean, Plain, River, Savanna, StoneBeach, Swamp, Taiga, TheEnd };
+    
+    // TODO: Research fields
+    char filler[0x9C];
+    /* size = 0x9C */
+
+    // virtual
+    virtual void setColor(int);
+    virtual void setColor(int, bool);
+    virtual ~Biome();
+    virtual std::unique_ptr<Feature> getTreeFeature(Random*);
+    virtual std::unique_ptr<Feature> getGrassFeature(Random*);
+    virtual void getTemperature();
+    virtual void adjustScale(float);
+    virtual void adjustDepth(float);
+    virtual unsigned int getSkyColor(float);
+    virtual void* getMobs(EntityType);
+    virtual void getCreatureProbability();
+    virtual unsigned int getFoliageColor();
+    virtual unsigned int getBirchFoliageColor();
+    virtual unsigned int getEvergreenFoliageColor();
+    virtual void* getMapFoliageColor();
+    virtual void* getMapBirchFoliageColor();
+    virtual void* getMapEvergreenFoliageColor();
+    virtual void getRandomFlowerTypeAndData(Random&, BlockPos const&);
+    virtual void decorate(BlockSource*, Random&, BlockPos const&, bool, float);
+    virtual void buildSurfaceAt(Random&, BlockVolume&, BlockPos const&, float, short);
+    virtual unsigned int getGrassColor(BlockPos const&);
+    virtual void* getMapGrassColor(BlockPos const&);
+    virtual void refreshBiome(unsigned int);
+    virtual void getTemperatureCategory() const;
+    virtual bool isSame(Biome*);
+    virtual bool isHumid();
+    virtual Biome* createMutatedCopy(int);
+
+    // non virtual
+    Biome(int, Biome::BiomeType, std::unique_ptr<BiomeDecorator>);
+    void LoadInstanceData(LevelStorage &);
+    void ResetInstanceData();
+    void SaveInstanceData(LevelStorage &);
+    void _placeBedrock(Random &,BlockVolume &,BlockPos const&);
+    void buildSurfaceAtDefault(Random &,BlockVolume &,BlockPos const&,float,short);
+    void clearMobs(bool,bool,bool);
+    Biome* createMutatedCopy();
+    BiomeType getBiomeType();
+    float getDownfall();
+    int getDownfallInt();
+    void getSnowAccumulationLayers();
+    bool isSnowCovered();
+    void refreshBiomes(unsigned int);
+    void setDepthAndScale(Biome::BiomeHeight const&);
+    void setLeafColor(int);
+    void setName(std::string const&);
+    void setNoRain();
+    void setOddColor(int);
+    void setSnowAccumulation(float,float);
+    void setSnowCovered();
+    void setTemperatureAndDownfall(float,float);
+
+    // static
+    static void initBiomes();
+    static Biome* getBiome(int);
+    static Biome* getBiome(int, Biome*);
+
 };

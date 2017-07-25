@@ -20,30 +20,30 @@ ItemCookedSilkworm* ENItems::cookedSilkworm;
 void ENItems::init() {
 	registerItemIds();
 	
-	hammerWood = new HammerBase("hammerWood", 64, Item::Tier::WOOD);
+	hammerWood = &registerItem<HammerBase>("hammerWood", getNextItemId(), 64, Item::Tier::WOOD);
 	hammerWood->setCategory(CreativeItemCategory::TOOLS);
 	
-	hammerStone = new HammerBase("hammerStone", 128, Item::Tier::STONE);
+	hammerStone = &registerItem<HammerBase>("hammerStone", getNextItemId(), 128, Item::Tier::STONE);
 	hammerStone->setCategory(CreativeItemCategory::TOOLS);
 	
-	hammerIron = new HammerBase("hammerIron", 512, Item::Tier::IRON);
+	hammerIron = &registerItem<HammerBase>("hammerIron", getNextItemId(), 512, Item::Tier::IRON);
 	hammerIron->setCategory(CreativeItemCategory::TOOLS);
 	
-	hammerDiamond = new HammerBase("hammerDiamond", 4096, Item::Tier::DIAMOND);
+	hammerDiamond = &registerItem<HammerBase>("hammerDiamond", getNextItemId(), 4096, Item::Tier::DIAMOND);
 	hammerDiamond->setCategory(CreativeItemCategory::TOOLS);
 	
-	hammerGold = new HammerBase("hammerGold", 64, Item::Tier::GOLD);
+	hammerGold = &registerItem<HammerBase>("hammerGold", getNextItemId(), 64, Item::Tier::GOLD);
 	hammerGold->setCategory(CreativeItemCategory::TOOLS);
 
-	crookWood = new CrookBase("crookWood", 64);
+	crookWood = &registerItem<CrookBase>("crookWood", getNextItemId(), 64);
 	crookWood->setCategory(CreativeItemCategory::TOOLS);
 		
-	crookBone = new CrookBase("crookBone", 256);
+	crookBone = &registerItem<CrookBase>("crookBone", getNextItemId(), 256);
 	crookBone->setCategory(CreativeItemCategory::TOOLS);
 
-	resources = new ItemResource();
+	resources = &registerItem<ItemResource>("itemMaterial", getNextItemId());
 	
-	cookedSilkworm = new ItemCookedSilkworm();
+	cookedSilkworm = &registerItem<ItemCookedSilkworm>("silkwormCooked", getNextItemId());
 }
 
 void ENItems::initCreativeItems() {
@@ -87,5 +87,5 @@ void ENItems::registerItemIds() {
 int ENItems::getNextItemId() {	
 	int id = freeIds[index];
 	index++;
-	return id;
+	return id - 0x100;
 }

@@ -5,7 +5,9 @@
 #include "mcpe/entity/Entity.h"
 #include "mcpe/level/BlockSource.h"
 #include "mcpe/block/Block.h"
-#include "mcpe/client/resources/I18n.h"
+#include "mcpe/level/BlockPos.h"
+#include "mcpe/locale/I18n.h"
+#include "mcpe/item/ItemInstance.h"
 
 const std::string ItemResource::PORCELAIN_CLAY = "porcelain_clay";
 const std::string ItemResource::SILKWORM = "silkworm";
@@ -16,10 +18,9 @@ const std::string ItemResource::DOLL_BASE = "doll";
 std::string ItemResource::names[6];
 std::string ItemResource::textures[6];
 
-ItemResource::ItemResource() : Item("itemMaterial", ENItems::getNextItemId() - 0x100) {
+ItemResource::ItemResource(const std::string& name, int id) : Item(name, id) {
 	setCategory(CreativeItemCategory::ITEMS);
 	setStackedByData(true);
-	Item::mItems[itemId] = this;
 
 	names[0] = "removed";
 	names[1] = PORCELAIN_CLAY;
@@ -37,23 +38,23 @@ ItemResource::ItemResource() : Item("itemMaterial", ENItems::getNextItemId() - 0
 }
 
 std::string ItemResource::buildDescriptionName(ItemInstance const& stack) const {
-	return I18n::get(name + "." + names[stack.aux] + ".name");
+	return I18n::get(name + "." + names[stack.data] + ".name");
 }
 
-bool ItemResource::useOn(ItemInstance& stack, Entity& player, int x, int y, int z, signed char side, float hitX, float hitY, float hitZ) {
-	if (names[stack.aux] == SILKWORM) {
-		Block* block = player.getRegion().getBlock(x, y, z);
+bool ItemResource::_useOn(ItemInstance& stack, Entity& player, BlockPos pos, signed char side, float hitX, float hitY, float hitZ) const {
+	if (names[stack.data] == SILKWORM) {
+		Block* block = player.getRegion()->getBlock(pos);
 		if (block != NULL && (block == Block::mLeaves || block == Block::mLeaves2)) {
-		    //BlockInfestedLeaves::infestLeafBlock(player.getRegion(), {x, y, z});
+		    //BlockInfestedLeaves::infestLeafBlock(player.getRegion(), pos);
 			stack.count--;
 			return true;
 		}
 	}
-	if (names[stack.aux] == ANCIENT_SPORES || names[stack.aux] == GRASS_SEEDS) {
-		Block* block = player.getRegion().getBlock(x, y, z);
+	if (names[stack.data] == ANCIENT_SPORES || names[stack.data] == GRASS_SEEDS) {
+		Block* block = player.getRegion()->getBlock(pos);
 		if (block != NULL && block == Block::mDirt) {
-			Block* transformTo = names[stack.aux] == ANCIENT_SPORES ? Block::mMycelium : Block::mGrass;
-			player.getRegion().setBlockAndData(x, y, z, FullBlock(BlockID(transformTo->blockId), 0), 3);
+			Block* transformTo = names[stack.data] == ANCIENT_SPORES ? Block::mMycelium : Block::mGrass;
+			player.getRegion()->setBlockAndData(pos.x, pos.y, pos.z, FullBlock(BlockID(transformTo->blockId), 0), 3);
 			stack.count--;
 			return true;
 		}
@@ -78,6 +79,6 @@ ItemInstance* ItemResource::getResourceStack(const std::string& name) {
 ItemInstance* ItemResource::getResourceStack(const std::string& name, int quantity) {
 	for (int i = 0; i < 6; i++) {
 		if(names[i] == name)
-			return new ItemInstance(ENItems::resources, quantity, i);
+			return new ItemInstance(*ENItems::resources, quantity, i);
 	}
 }

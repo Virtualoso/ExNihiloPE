@@ -4,8 +4,8 @@
 #include "mcpe/item/Item.h"
 #include "mcpe/block/Block.h"
 #include "mcpe/util/Util.h"
-#include "mcpe/util/FullBlock.h"
-#include "mcpe/tag/CompoundTag.h"
+#include "mcpe/block/FullBlock.h"
+#include "mcpe/nbt/CompoundTag.h"
 
 #include "StringUtils.h"
 
@@ -15,7 +15,7 @@ ItemInfo* ItemInfo::getItemInfoFromStack(ItemInstance* stack) {
 	
 ItemInfo::ItemInfo(ItemInstance* stack) {
 	item = stack == NULL ? NULL : stack->item;
-	meta = stack == NULL ? -1 : stack->aux;
+	meta = stack == NULL ? -1 : stack->data;
 }
 	
 ItemInfo::ItemInfo(Block* block, int blockMeta) {
@@ -40,7 +40,7 @@ ItemInfo::ItemInfo(const std::string& string) {
 	
 ItemInfo::ItemInfo(const FullBlock& block) {
 	item = block.id.id == NULL ? NULL : Item::mItems[block.id.id];
-	meta = block.aux == NULL ? -1 : block.aux;
+	meta = block.data == NULL ? -1 : block.data;
 }
 	
 std::string ItemInfo::toString() {
@@ -53,7 +53,7 @@ std::string ItemInfo::toString() {
 }
 	
 ItemInstance* ItemInfo::getItemStack() {
-	return item == NULL ? NULL : new ItemInstance(item, 1, meta == -1 ? 0 : meta);
+	return item == NULL ? NULL : new ItemInstance(*item, 1, meta == -1 ? 0 : meta);
 }
 	
 CompoundTag* ItemInfo::writeToNBT(CompoundTag* tag) {
@@ -67,7 +67,7 @@ ItemInfo* ItemInfo::readFromNBT(CompoundTag* tag) {
 	Item* item_ = Item::lookupByName(tag->getString("item"), true);
 	int meta_ = tag->getInt("meta");
 	
-	return new ItemInfo(new ItemInstance(item_, 1, meta_));
+	return new ItemInfo(new ItemInstance(*item_, 1, meta_));
 }
 	
 int ItemInfo::hashCode() {

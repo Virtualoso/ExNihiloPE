@@ -1,24 +1,34 @@
 #pragma once
 
 #include "Button.h"
-#include "ImageDef.h"
+#include "IntRectangle.h"
+#include "../renderer/TexturePtr.h"
 
-class ImageDef;
+struct ImageDef {
+	mce::TexturePtr texturePtr; // 0
+	int x; // 20
+	int y; // 24
+	float width; // 28
+	float height; // 32
+	IntRectangle src; // 36
+	bool hasSrc; // 52
+};
 
-// Size : 180
-class ImageButton : public Button
-{
+class ImageButton : public Button {
 public:
-	char filler1[72];		// 108
+	ImageDef imageDef; // 108
+	Color overlay; // 164
+	bool scaleWhenPressed; // 180
+	int yOffset; // 184
 
-public:
-	ImageButton(int, const std::string &);
-	ImageButton(int, const std::string &, ImageDef );
 	virtual ~ImageButton();
-	virtual void render(MinecraftClient *, int, int);
-	virtual void renderBg(MinecraftClient *, int, int);
+	virtual void render(MinecraftGame*, int, int);
+	virtual void renderBg(MinecraftGame*, int, int);
 	virtual void setYOffset(int);
 	virtual void setupDefault();
-	virtual void isSecondImage(bool);
-	void setImageDef(ImageDef const &, bool);
+	virtual bool isSecondImage(bool);
+
+	ImageButton(int, std::string const&);
+	ImageButton(int, std::string const&, ImageDef);
+	void setImageDef(ImageDef, bool);
 };

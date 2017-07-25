@@ -14,7 +14,7 @@ public:
 	virtual bool isHandEquipped() const;
 	virtual void appendFormattedHovertext(const ItemInstance&, Level&, std::string&, bool) const;
 	virtual bool isValidRepairItem(const ItemInstance&, const ItemInstance&);
-	virtual int getEnchantValue() const;
+	virtual short getEnchantValue() const;
 	virtual float getDestroySpeed(ItemInstance*, const Block*);
 	virtual bool mineBlock(ItemInstance*, BlockID, int, int, int, Entity*);
 };

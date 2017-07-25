@@ -1,7 +1,7 @@
 #pragma once 
 
-#include "mcpe/recipe/Recipes.h"
-#include "mcpe/recipe/FurnaceRecipes.h"
+#include "mcpe/item/recipes/Recipes.h"
+#include "mcpe/item/recipes/FurnaceRecipes.h"
 
 class ExNihiloPERecipes
 { 

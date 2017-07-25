@@ -2,19 +2,18 @@
 
 #include "LargeImageButton.h"
 
-class Textures;
+class NinePatchLayer;
 
-// Size : 192
-class ImageWithBackground : public LargeImageButton
-{
+class ImageWithBackground : public LargeImageButton {
 public:
-	char filler1[12];		// 180
+	NinePatchLayer* layer1; // 192
+	NinePatchLayer* layer2; // 196
 
-public:
-	ImageWithBackground(int);
 	virtual ~ImageWithBackground();
-	virtual void render(MinecraftClient *, int, int);
-	virtual void renderBg(MinecraftClient *, int, int);
-	void init(TextureGroup *, int, int, IntRectangle, IntRectangle, int, int, std::string const &);
+	virtual void render(MinecraftGame*, int, int);
+	virtual void renderBg(MinecraftGame*, int, int);
+	
+	ImageWithBackground(int);
 	void setSize(float, float);
+	void init(mce::TextureGroup*, int, int, IntRectangle, IntRectangle, int, int, ResourceLocation const&);
 };

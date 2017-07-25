@@ -4,14 +4,14 @@
 #include <stdlib.h>
 #include "substrate.h"
 
-#include "mcpe/client/resources/Localization.h"
-#include "mcpe/recipe/FurnaceRecipes.h"
-#include "mcpe/entity/player/Player.h"
+#include "mcpe/locale/Localization.h"
+#include "mcpe/item/recipes/FurnaceRecipes.h"
+#include "mcpe/player/Player.h"
 #include "mcpe/level/BlockSource.h"
 #include "mcpe/client/renderer/BlockTessellator.h"
 #include "mcpe/block/Block.h"
 #include "mcpe/item/Item.h"
-#include "mcpe/util/BlockPos.h"
+#include "mcpe/level/BlockPos.h"
 
 #include "exnihilope/ExNihiloPE.h"
 #include "exnihilope/items/ENItems.h"
@@ -78,12 +78,31 @@ void initFurnaceRecipes(FurnaceRecipes *recipes) {
 	LOG("Furnace Recipes Initiated");
 }
 
-void (*_Localization$_load)(Localization*, const std::string&);
-void Localization$_load(Localization *self, const std::string &langCode) {
-	_Localization$_load(self, langCode);
+void (*_Localization$loadFromPack)(Localization*, std::string const&, PackAccessStrategy&, std::vector<std::string> const&);
+void Localization$loadFromPack(Localization *self, std::string const& s1, PackAccessStrategy& pas, std::vector<std::string> const& stringVec) {
+	_Localization$loadFromPack(self, s1, pas, stringVec);
 	
-	if(langCode == "en_US" )
-		_Localization$_load(self, "exnihilope/" + langCode);
+	if(self->langCode == "en_US" )
+	{
+		std::string backupString = self->langCode;
+		self->langCode = "exnihilope/" + self->langCode;
+		_Localization$loadFromPack(self, s1, pas, stringVec);
+		self->langCode = backupString;
+	}
+
+}
+
+void (*_Localization$loadFromResourcePackManager)(Localization*, ResourcePackManager&, std::vector<std::string> const&);
+void Localization$loadFromResourcePackManager(Localization *self, ResourcePackManager& rpm, std::vector<std::string> const& stringVec) {
+	_Localization$loadFromResourcePackManager(self, rpm, stringVec);
+	
+	if(self->langCode == "en_US" )
+	{
+		std::string backupString = self->langCode;
+		self->langCode = "exnihilope/" + self->langCode;
+		_Localization$loadFromResourcePackManager(self, rpm, stringVec);
+		self->langCode = backupString;
+	}
 }
 
 void (*Block$_playerDestroy)(Block*, Player*, const BlockPos&, int);
@@ -102,7 +121,8 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)  {
 	MSHookFunction((void*)((void(BlockTessellator::*)(Block const&,BlockPos const&,unsigned char,bool))&BlockTessellator::tessellateInWorld),(void*)&tessellateInWorld,(void**)&_tessellateInWorld);
 	MSHookFunction((void*) &Recipes::init, (void*) &initRecipes, (void**) &_initRecipes);
 	MSHookFunction((void*) &FurnaceRecipes::_init, (void*) &initFurnaceRecipes, (void**) &_initFurnaceRecipes);
-	MSHookFunction((void*) &Localization::_load, (void*) &Localization$_load, (void**) &_Localization$_load);
+	MSHookFunction((void*) &Localization::loadFromPack, (void*) &Localization$loadFromPack, (void**) &_Localization$loadFromPack);
+	MSHookFunction((void*) &Localization::loadFromResourcePackManager, (void*) &Localization$loadFromResourcePackManager, (void**) &_Localization$loadFromResourcePackManager);
 	MSHookFunction((void*) &Block::playerDestroy, (void*) &Block$playerDestroy, (void**) &Block$_playerDestroy);
 
 	return JNI_VERSION_1_6;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.smartdev.exnihilope.addon"
+	package="com.virtualoso.exnihilope"
 	android:versionCode="1"
 	android:versionName="0.0.1">
 
@@ -17,11 +17,11 @@
     <!-- metadata specifying the library name. must match Android.mk.-->
     	<meta-data
 			android:name="net.zhuoweizhang.mcpelauncher.api.nativelibname"
-    	    android:value="smartdev.exnihilope" />
+    	    android:value="exnihilope" />
 
   	  <meta-data
 		  android:name="net.zhuoweizhang.mcpelauncher.api.targetmcpeversion"
-		  android:value="1.0.5.13"/>
+		  android:value="1.1.4.51"/>
     </application>
 </manifest>
 

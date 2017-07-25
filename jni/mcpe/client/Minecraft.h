@@ -1,61 +1,84 @@
 #pragma once
 
+#include <string>
+#include <chrono>
+#include <ratio>
 #include <memory>
-#include "../gamemode/GameType.h"
+#include <vector>
 
 class GameCallbacks;
 class SkinInfoFactory;
 class Vibration;
 class SoundPlayer;
+namespace minecraft {
+	namespace api {
+		class Api;
+	};
+};
 class Whitelist;
-class LevelSettings;
-class ServerCommandParser;
-class GameMode;
+class OpsList;
+class MinecraftEventing;
+enum GameType;
 class Level;
-class NetEventCallback;
-class PacketSender;
-class RakNetInstance;
-class ServerNetworkHandler;
+class GameMode;
 class Player;
+namespace mce {
+	class UUID;
+};
+class NetEventCallback;
+class LevelSettings;
 class ResourcePackManager;
+class NetworkIdentifier;
 
-// Size : 80
-class Minecraft
-{
+class Minecraft {
 public:
-	char filler1[56];					// 0
-	ServerCommandParser *commandParser;	// 56
 
-public:
-	Minecraft(GameCallbacks &, SkinInfoFactory &, Vibration &, SoundPlayer &, Whitelist const &, std::string const &);
+	char filler1[112];
+	/* size = 0x70 */
+
+	// non virtual
+	Minecraft(GameCallbacks&, SkinInfoFactory&, Vibration&, SoundPlayer&, minecraft::api::Api&, Whitelist const&, OpsList const&, std::string const&, std::chrono::duration<long long, std::ratio<1ll, 1ll> >, MinecraftEventing&);
 	~Minecraft();
-	void createGameMode(GameType, Level &);
-	void createLevel(std::string const &, std::string const &, LevelSettings const &,ResourcePackManager&);
-	ServerCommandParser *getCommandParser();
-	GameMode *getGameMode();
-	Level *getLevel();
-	void *getLevelSource();
-	NetEventCallback *getNetEventCallback();
-	PacketSender *getPacketSender();
-	RakNetInstance *getRakNetInstance();
-	std::string getServerName();
-	ServerNetworkHandler *getServerNetworkHandler();
-	void *getTimer();
-	void *getUser();
-	void hostMultiplayer(std::unique_ptr<Level>, std::unique_ptr<GameMode>, Player *, std::unique_ptr<NetEventCallback>, bool, int, int);
-	void init(std::string const &);
-	void initAsDedicatedServer();
 	bool isModded();
-	bool isOnlineClient();
-	void onClientStartedLevel(std::unique_ptr<Level>);
-	void resetGameSession();
-	void restartMultiplayerHost(int, int);
-	void setGameModeReal(GameType);
+	void* getCommands();
+	void* getNetworkHandler();
+	void* getLevel();
+	void* getServerNetworkHandler();
+	void* getEventing() const;
+	void* getSimPaused() const;
+	void* createGameMode(GameType, Level&);
+	void* getLevelSource();
+	void hostMultiplayer(std::unique_ptr<Level>, std::unique_ptr<GameMode>, Player*, mce::UUID const&, std::unique_ptr<NetEventCallback>, int, bool, bool, std::vector<std::string> const&, std::string, int, int, int, int);
+	void* getResourceLoader();
+	void* getStructureManager();
+	void initAsDedicatedServer();
+	void init(std::string const&, bool);
+	void update();
+	void createLevel(std::string const&, std::string const&, LevelSettings const&, ResourcePackManager&);
+	void* getGameMode();
+	void tickSimtime(int, int);
 	void setLeaveGame();
-	void setupServerCommands();
+	void tickRealtime(int, int);
+	void* getServerName();
+	void* validateLevel(std::string const&, std::string const&, LevelSettings const&);
+	bool isOnlineClient();
+	void* getPacketSender();
+	void setGameModeReal(GameType);
+	void setSimTimePause(bool);
+	void setSimTimeScale(float);
 	void startClientGame(std::unique_ptr<NetEventCallback>);
+	void disconnectClient(NetworkIdentifier const&, std::string const&);
+	void* getServerLocator();
+	void resetGameSession();
+	void activateWhitelist();
+	void* getNetEventCallback();
+	void setupServerCommands(std::string const&, std::string const&);
+	void* getNetworkStatistics();
+	void onClientStartedLevel(std::unique_ptr<Level>);
+	void restartMultiplayerHost(int, int, int, int);
+	void* getUser();
+	void* getTimer();
 	void stopGame();
 	void teardown();
-	void tick(int, int);
-	void update();
+	bool isInitialized() const;
 };

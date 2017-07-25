@@ -3,15 +3,16 @@
 #include <algorithm>
 
 #include "enchant/EnchantUtils.h"
-#include "../client/resources/I18n.h"
+#include "../locale/I18n.h"
 #include "../block/Block.h"
+#include "ItemInstance.h"
 
 ToolItem::ToolItem(const std::string& name, short id, float damage, Item::Tier tier, std::vector<Block*> blocks)
     : Item(name, id) {
     
     toolMaterial = &tier;
     validBlocks = blocks;
-    _maxStackSize = 1;
+    maxStackSize = 1;
     setMaxDamage(tier.maxUses);
     efficiencyOnProperMaterial = tier.efficiencyOnProperMaterial;
     damageVsEntity = damage + tier.damageVsEntity;
@@ -34,13 +35,13 @@ bool ToolItem::isValidRepairItem(const ItemInstance& item, const ItemInstance& r
     return toolMaterial->getTierItem().item == repairItem.item ? true : Item::isValidRepairItem(item, repairItem);
 }
 
-int ToolItem::getEnchantValue() const {
+short ToolItem::getEnchantValue() const {
     return toolMaterial->enchantability;
 }
 
 float ToolItem::getDestroySpeed(ItemInstance* item, const Block* block) {
     if(block && std::find(validBlocks.begin(), validBlocks.end(), block) != validBlocks.end())
-        return efficiencyOnProperMaterial + destroySpeedBonus(item);
+        return efficiencyOnProperMaterial + destroySpeedBonus(*item);
     return 1.0F;
 }
 

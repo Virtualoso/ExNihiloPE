@@ -3,8 +3,8 @@
 #include "mcpe/item/ItemInstance.h"
 #include "mcpe/block/Block.h"
 #include "mcpe/util/Util.h"
-#include "mcpe/util/FullBlock.h"
-#include "mcpe/tag/CompoundTag.h"
+#include "mcpe/block/FullBlock.h"
+#include "mcpe/nbt/CompoundTag.h"
 
 #include "StringUtils.h"
 
@@ -15,12 +15,12 @@ BlockInfo::BlockInfo(Block* _block, int blockMeta) {
 
 BlockInfo::BlockInfo(const FullBlock& fullBlock) {
 	block = fullBlock.id.id == NULL ? NULL : Block::mBlocks[fullBlock.id.id];
-	meta = fullBlock.aux == NULL ? -1 : fullBlock.aux;
+	meta = fullBlock.data == NULL ? -1 : fullBlock.data;
 }
 	
 BlockInfo::BlockInfo(ItemInstance* stack) {
-	block = (stack == NULL || stack->block == NULL) ? NULL : stack->block;
-	meta = stack == NULL ? -1 : stack->aux;
+	block = (stack == NULL || stack->tile == NULL) ? NULL : stack->tile;
+	meta = stack == NULL ? -1 : stack->data;
 }
 
 BlockInfo::BlockInfo(const std::string& string) {
@@ -40,7 +40,7 @@ BlockInfo::BlockInfo(const std::string& string) {
 	
 std::string BlockInfo::toString() {
 	std::stringstream stm;
-	stm<<Util::toLower(block->name);
+	stm<<Util::toLower(block->nameId);
 	stm<<(meta == -1 ? "" : (":" + meta));
 	std::string ret;
 	stm>>ret;
@@ -52,7 +52,7 @@ FullBlock BlockInfo::getBlockState() {
 }
 	
 CompoundTag* BlockInfo::writeToNBT(CompoundTag* tag) {
-	tag->putString("block", Util::toLower(block->name));
+	tag->putString("block", Util::toLower(block->nameId));
 	tag->putInt("meta", meta);
 	
 	return tag;

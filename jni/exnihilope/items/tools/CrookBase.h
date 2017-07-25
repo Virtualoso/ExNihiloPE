@@ -4,7 +4,7 @@
 
 class CrookBase : public ToolItem {
 public:
-	CrookBase(const std::string&, int);
+	CrookBase(const std::string&, int, int);
 
-	virtual float getDestroySpeed(ItemInstance*, const Block*);
+	virtual float getDestroySpeed(const ItemInstance&, const Block&) const;
 };

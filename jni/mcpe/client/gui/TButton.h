@@ -2,26 +2,23 @@
 
 #include "Button.h"
 
-class NinePatchLayer;
-class MinecraftClient;
+class ResourceLocation;
 
-namespace Touch
-{
-// Size : 116
-class TButton : public Button
-{
-public:
-	NinePatchLayer* unclickedNinePatchLayer;		// 108
-	NinePatchLayer* clickedNinePatchLayer;			// 112
-	MinecraftClient* mc;
+namespace Touch {
 
+class TButton : public Button {
 public:
-	TButton(int, int, int, int, int, std::string const &, MinecraftClient *, bool, int);
-	TButton(int, int, int, std::string const &, MinecraftClient *, int);
-	TButton(int, std::string const &, MinecraftClient *, bool, int);
+	char filler[8];
+
 	virtual ~TButton();
-	virtual void renderBg(MinecraftClient *, int, int);
-	void init(MinecraftClient *);
-	void init(MinecraftClient *, std::string const &, IntRectangle const &, IntRectangle const &, int, int, int, int);
+	virtual void renderBg(MinecraftGame*, int, int);
+
+	TButton(int, std::string const&, MinecraftGame*, bool, int);
+	TButton(int, int, int, std::string const&, MinecraftGame*, int);
+	TButton(int, int, int, int, int, std::string const&, MinecraftGame*, bool, int);
+	void init(MinecraftGame*);
+	void init(MinecraftGame*, std::string const&, IntRectangle const&, IntRectangle const&, int, int, int, int);
+	void init(MinecraftGame*, ResourceLocation const&, IntRectangle const&, IntRectangle const&, int, int, int, int);
 };
+
 };

@@ -101,7 +101,7 @@ std::vector<ItemInstance*> HammerRegistry::getRewardDrops(Random& random, Block*
 	for (HammerReward* reward : getRewards(block, meta)) {
 		if (miningLevel >= reward->getMiningLevel()) {
 			if (random.nextFloat() <= reward->getChance() + (reward->getFortuneChance() * fortuneLevel)) {
-				rewards.emplace_back(ItemInstance::clone(reward->getStack()));
+				rewards.emplace_back(reward->getStack());
 			}
 		}
 	}

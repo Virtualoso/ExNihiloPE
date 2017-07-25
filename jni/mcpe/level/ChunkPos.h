@@ -2,22 +2,19 @@
 
 class BlockPos;
 class Vec3;
-class Entity;
 
-class ChunkPos
-{
-public:
-	static ChunkPos INVALID;
+class ChunkPos {
 
 public:
-	int x;	// 0
-	int z;	// 4
 
-public:
-	ChunkPos(const BlockPos &);
-	ChunkPos(const Vec3 &);
-	ChunkPos(float, float, float);
-	ChunkPos(int, int, int);
-	ChunkPos()=default;
-	float distanceToSqr(const Entity *) const;
+    int x, int z;
+
+    // non virtual
+    ChunkPos(BlockPos const&);
+    ChunkPos(Vec3 const&);
+    float distanceToSqr(Entity const&) const;
+    BlockPos getMiddleBlockPosition(int) const;
+
+    // static
+    static ChunkPos INVALID;
 };

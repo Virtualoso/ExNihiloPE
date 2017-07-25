@@ -18,7 +18,7 @@ public:
 	virtual void playerDestroy(Player*, BlockPos const&, int) const;
 	virtual void getMobToSpawn(BlockSource&, BlockPos const&) const;
 	virtual Color getMapColor(BlockSource&, BlockPos const&) const;
-	virtual int getColor(BlockSource&, BlockPos const&, unsigned char) const;
+	virtual unsigned int getColor(BlockSource&, BlockPos const&, unsigned char) const;
 	virtual bool isSeasonTinted(BlockSource&, BlockPos const&) const;
 	virtual Block* onGraphicsModeChanged(bool, bool, bool);
 	virtual int getRenderLayer(BlockSource&, BlockPos const&) const;

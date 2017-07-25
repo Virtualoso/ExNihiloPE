@@ -2,13 +2,14 @@
 
 #include "ImageButton.h"
 
-// Size : 180
-class LargeImageButton : public ImageButton
-{
+class LargeImageButton : public ImageButton {
 public:
-	LargeImageButton(int, std::string const &);
-	LargeImageButton(int, std::string const &, ImageDef &);
+	float idk; // 188
+
 	virtual ~LargeImageButton();
-	virtual void render(MinecraftClient *, int, int);
+	virtual void render(MinecraftGame*, int, int);
 	virtual void setupDefault();
+	
+	LargeImageButton(int, std::string const&);
+	LargeImageButton(int, std::string const&, ImageDef);
 };

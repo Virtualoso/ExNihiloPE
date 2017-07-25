@@ -1,9 +1,12 @@
 #pragma once
 
-enum class CreativeItemCategory : unsigned char
+enum class CreativeItemCategory : int
 {
-	BLOCKS = 1,
+	ALL,
+	BLOCKS,
 	DECORATIONS,
 	TOOLS,
-	ITEMS
+	ITEMS,
+	COMMANDONLY,
+	NONE
 };

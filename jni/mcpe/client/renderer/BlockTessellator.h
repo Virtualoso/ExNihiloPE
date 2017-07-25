@@ -1,14 +1,14 @@
 #pragma once
 
-#include "texture/TextureUVCoordinateSet.h"
-#include "mcpe/util/AABB.h"
+#include "TextureUVCoordinateSet.h"
+#include "../../math/AABB.h"
 #include "MaterialPtr.h"
-#include "mcpe/block/Block.h"
-#include "mcpe/block/BlockShape.h"
-#include "mcpe/level/BlockSource.h"
+#include "../../block/Block.h"
+#include "block/BlockShape.h"
+#include "../../level/BlockSource.h"
 #include "Tessellator.h"
-#include "mcpe/util/BlockPos.h"
-#include "mcpe/block/BlockGraphics.h"
+#include "../../level/BlockPos.h"
+#include "block/BlockGraphics.h"
 class Vec3;
 typedef unsigned char uchar;
 
@@ -34,7 +34,7 @@ class WallBlock;
 class BaseRailBlock;
 class AnvilPart;
 class BrightnessPair;
-class BlockRenderLayer;
+enum class BlockRenderLayer;
 class BlockOccluder;
 
 class BlockTessellator

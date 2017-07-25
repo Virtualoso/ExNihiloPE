@@ -4,5 +4,5 @@
 
 class ItemCookedSilkworm : public Item {
 public:
-	ItemCookedSilkworm();
+	ItemCookedSilkworm(const std::string&, int);
 };

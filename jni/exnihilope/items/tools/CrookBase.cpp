@@ -5,14 +5,13 @@
 #include "database/CrookDatabase.h"
 #include "../../registries/CrookRegistry.h"
 
-CrookBase::CrookBase(const std::string& name, int maxUses)
-	: ToolItem(name, ENItems::getNextItemId() - 0x100, 0.0F, Item::Tier::WOOD, {}) {
+CrookBase::CrookBase(const std::string& name, int id, int maxUses)
+	: ToolItem(name, id, 0.0F, Item::Tier::WOOD, {}) {
 
 	setMaxDamage(maxUses);
-	Item::mItems[itemId] = this;
 	CrookDatabase::registerCrook(this);
 }
 
-float CrookBase::getDestroySpeed(ItemInstance* item, const Block* block) {
-	return CrookRegistry::registered(block) ? efficiencyOnProperMaterial : 1.0F;
+float CrookBase::getDestroySpeed(const ItemInstance& item, const Block& block) const {
+	return CrookRegistry::registered(&block) ? efficiencyOnProperMaterial : 1.0F;
 }

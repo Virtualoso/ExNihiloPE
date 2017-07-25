@@ -388,7 +388,7 @@ public:
 	void getToggleCrouch(InputMode) const;
 	void getDevRenderPaths() const;
 	void getPpmDpadSizeOld() const;
-	void getFlatWorldLayers() const;
+	std::string getFlatWorldLayers() const;
 	void getLastBetaVersion() const;
 	void getDestroyVibration(InputMode) const;
 	std::string getLastCustomSkinId() const;
@@ -446,4 +446,3 @@ public:
 	static Options * VR_RIGHTSTICK_PITCHASSIST_STEPPINGS_DIVISORS;
 	static Options * GUI_SCALE;
 };
-

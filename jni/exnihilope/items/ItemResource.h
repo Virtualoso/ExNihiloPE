@@ -15,9 +15,9 @@ private:
 	static std::string textures[6];
 
 public:
-	ItemResource();
+	ItemResource(const std::string&, int);
     virtual std::string buildDescriptionName(ItemInstance const&) const;
-    virtual bool useOn(ItemInstance&, Entity&, int, int, int, signed char, float, float, float);
+    virtual bool _useOn(ItemInstance&, Entity&, BlockPos, signed char, float, float, float) const;
     virtual TextureUVCoordinateSet const& getIcon(int, int, bool) const;
 
 	static ItemInstance* getResourceStack(const std::string&);

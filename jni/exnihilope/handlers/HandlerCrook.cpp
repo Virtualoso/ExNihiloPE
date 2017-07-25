@@ -4,7 +4,7 @@
 
 #include "mcpe/item/ItemInstance.h"
 #include "mcpe/item/Item.h"
-#include "mcpe/entity/player/Player.h"
+#include "mcpe/player/Player.h"
 #include "mcpe/level/Level.h"
 #include "mcpe/item/enchant/EnchantUtils.h"
 #include "mcpe/block/Block.h"
@@ -14,7 +14,7 @@
 #include "../registries/types/CrookReward.h"
 
 bool HandlerCrook::crook(Block* block, int meta, const BlockPos& pos, Player* harvester) {
-	if (harvester->getLevel().isClientSide() || harvester == NULL) // isRemote, valid Player
+	if (harvester->getLevel()->isClientSide() || harvester == NULL) // isRemote, valid Player
 		return false;
 
 	ItemInstance* held = harvester->getSelectedItem();
@@ -27,14 +27,14 @@ bool HandlerCrook::crook(Block* block, int meta, const BlockPos& pos, Player* ha
 	std::vector<CrookReward*> rewards = CrookRegistry::getRewards(block, meta);
 	if (rewards.size() > 0) {
 		for(CrookReward* reward : rewards) {
-			if (harvester->getLevel().getRandom().nextFloat() <= reward->getChance() + (reward->getFortuneChance() * fortune)) {
-				block->popResource(harvester->getRegion(), pos, *(ItemInstance::clone(reward->getStack())));
+			if (harvester->getLevel()->getRandom()->nextFloat() <= reward->getChance() + (reward->getFortuneChance() * fortune)) {
+				block->popResource(*(harvester->getRegion()), pos, reward->getStack()->clone());
 			}
 		}
 	}
 	if (block == Block::mLeaves || block == Block::mLeaves2) { //Simulate vanilla drops
 		for (int i = 0 ; i < 4; i++) { // todo config
-			block->spawnResources(harvester->getRegion(), pos, meta, 1.0F, fortune);
+			block->spawnResources(*(harvester->getRegion()), pos, meta, 1.0F, fortune);
 		}
 	}
 	else {

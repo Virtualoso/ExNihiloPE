@@ -1,34 +1,32 @@
 #pragma once
 
-// Size : 16
-class Color
-{
+class Color {
 public:
-	static const Color BLACK;
-	static const Color BLUE;
-	static const Color CYAN;
-	static const Color GREEN;
-	static const Color GREY;
-	static const Color NIL;
-	static const Color PURPLE;
-	static const Color RED;
-	static const Color WHITE;
-	static const Color YELLOW;
-	static const Color SHADE_DOWN;
-	static const Color SHADE_NORTH_SOUTH;
-	static const Color SHADE_UP;
-	static const Color SHADE_WEST_EAST;
+    float red, green, blue, alpha;
 
-public:
-	float red;		// 0
-	float green;	// 4
-	float blue;		// 8
-	float alpha;	// 12
-
-public:
 	Color(){}
 	Color(float r, float g, float b, float a) : red(r), green(g), blue(b), alpha(a) {};
-	static Color *fromHSB(float, float, float);
-	int toARGB()const;
-	int toABGR()const;
+
+    unsigned int toARGB() const;
+    unsigned int toABGR() const;
+
+    static Color fromHSB(float, float, float);
+
+    static Color WHITE;
+    static Color GREY;
+    static Color BLACK;
+    static Color RED;
+    static Color GREEN;
+    static Color BLUE;
+    static Color YELLOW;
+    static Color ORANGE;
+    static Color PURPLE;
+    static Color CYAN;
+    static Color NIL;
+    static Color SHADE_DOWN;
+    static Color SHADE_UP;
+    static Color SHADE_NORTH_SOUTH;
+    static Color SHADE_WEST_EAST;
+
 };
+

@@ -8,8 +8,14 @@
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
-            }
+                "databaseFilename": "",
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include",
+                    "${workspaceRoot}"
+                ]
+            },
+            "intelliSenseMode": "clang-x64"
         },
         {
             "name": "Linux",
@@ -19,19 +25,32 @@
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
-            }
+                "databaseFilename": "",
+                "path": [
+                    "/usr/include",
+                    "/usr/local/include",
+                    "${workspaceRoot}"
+                ]
+            },
+            "intelliSenseMode": "clang-x64"
         },
         {
             "name": "Win32",
             "includePath": [
                 "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*",
-				"C:/Users/Andrew Miller/Documents/Mod Projects/ExNihiloPE/*"
+                "C:/Users/Andrew Miller/Documents/Mod Projects/ExNihiloPE/*"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
-            }
+                "databaseFilename": "",
+                "path": [
+                    "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*",
+                    "C:/Users/Andrew Miller/Documents/Mod Projects/ExNihiloPE/*",
+                    "${workspaceRoot}"
+                ]
+            },
+            "intelliSenseMode": "msvc-x64"
         }
-    ]
+    ],
+    "version": 2
 }
