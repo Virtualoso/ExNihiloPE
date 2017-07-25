@@ -51,6 +51,36 @@
 		  "name": "silkwormCooked"
 		},
 		{
+		  "name": "itemSeedOak"
+		},
+		{
+		  "name": "itemSeedSpruce"
+		},
+		{
+		  "name": "itemSeedBirch"
+		},
+		{
+		  "name": "itemSeedJungle"
+		},
+		{
+		  "name": "itemSeedAcacia"
+		},
+		{
+		  "name": "itemSeedDarkOak"
+		},
+		{
+		  "name": "itemSeedCactus"
+		},
+		{
+		  "name": "itemSeedSugarcane"
+		},
+		{
+		  "name": "itemSeedCarrot"
+		},
+		{
+		  "name": "itemSeedPotato"
+		},
+		{
 		  "name": "blockDust"
 		},
 		{

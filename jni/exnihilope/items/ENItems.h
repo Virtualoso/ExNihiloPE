@@ -6,6 +6,7 @@ class HammerBase;
 class CrookBase;
 class ItemResource;
 class ItemCookedSilkworm;
+class ItemSeedBase;
 
 class ENItems {
 public:
@@ -20,6 +21,8 @@ public:
 
 	static ItemResource* resources;
 	static ItemCookedSilkworm* cookedSilkworm;
+
+	static std::vector<ItemSeedBase*> itemSeeds;
 
 	static void init();
 	static void initCreativeItems();

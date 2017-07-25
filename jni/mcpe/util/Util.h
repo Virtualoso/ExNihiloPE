@@ -85,7 +85,10 @@ public:
 		stm>>ret;
 		return ret;
 	}
-	
+	static std::string capitalize(const std::string& current)
+	{
+		return Util::toUpper(current.substr(0, 1)) + current.substr(1);
+	}
 
     // static fields
     static void* REPLACEMENT_CHARACTER_CODE;

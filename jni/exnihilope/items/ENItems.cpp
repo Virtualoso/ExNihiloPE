@@ -4,6 +4,9 @@
 #include "tools/CrookBase.h"
 #include "ItemResource.h"
 #include "ItemCookedSilkworm.h"
+#include "ItemSeedBase.h"
+
+#include "mcpe/block/Block.h"
 
 HammerBase* ENItems::hammerWood;
 HammerBase* ENItems::hammerStone;
@@ -16,6 +19,8 @@ CrookBase* ENItems::crookBone;
 
 ItemResource* ENItems::resources;
 ItemCookedSilkworm* ENItems::cookedSilkworm;
+
+std::vector<ItemSeedBase*> ENItems::itemSeeds;
 
 void ENItems::init() {
 	registerItemIds();
@@ -44,6 +49,17 @@ void ENItems::init() {
 	resources = &registerItem<ItemResource>("itemMaterial", getNextItemId());
 	
 	cookedSilkworm = &registerItem<ItemCookedSilkworm>("silkwormCooked", getNextItemId());
+		
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedOak", getNextItemId(), Block::mSapling, 0));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedSpruce", getNextItemId(), Block::mSapling, 1));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedBirch", getNextItemId(), Block::mSapling, 2));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedJungle", getNextItemId(), Block::mSapling, 3));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedAcacia", getNextItemId(), Block::mSapling, 4));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedDarkOak", getNextItemId(), Block::mSapling, 5));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedCactus", getNextItemId(), Block::mCactus, 0));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedSugarcane", getNextItemId(), Block::mReeds, 0));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedCarrot", getNextItemId(), Block::mCarrotCrop, 0));
+	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedPotato", getNextItemId(), Block::mPotatoCrop, 0));
 }
 
 void ENItems::initCreativeItems() {
@@ -59,6 +75,9 @@ void ENItems::initCreativeItems() {
 		Item::addCreativeItem(resources, i);
 		
 	Item::addCreativeItem(cookedSilkworm, 0);
+
+	for (Item* seed : itemSeeds)
+		Item::addCreativeItem(seed, 0);
 }
 
 void ENItems::loadResources() {
@@ -71,6 +90,16 @@ void ENItems::loadResources() {
 	crookBone->setIcon("crookBone", 0);
 	resources->setIcon("itemPebble", 0);
 	cookedSilkworm->setIcon("silkwormCooked", 0);
+	itemSeeds[0]->setIcon("seedOak", 0);
+	itemSeeds[1]->setIcon("seedSpruce", 0);
+	itemSeeds[2]->setIcon("seedBirch", 0);
+	itemSeeds[3]->setIcon("seedJungle", 0);
+	itemSeeds[4]->setIcon("seedAcacia", 0);
+	itemSeeds[5]->setIcon("seedDarkOak", 0);
+	itemSeeds[6]->setIcon("seedCactus", 0);
+	itemSeeds[7]->setIcon("seedSugarcane", 0);
+	itemSeeds[8]->setIcon("seedCarrot", 0);
+	itemSeeds[9]->setIcon("seedPotato", 0);
 }
 
 

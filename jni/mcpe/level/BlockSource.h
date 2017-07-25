@@ -124,7 +124,7 @@ public:
     bool hasBorderBlock(BlockPos);
 
     void setBlock(int, int, int, BlockID, int);
-    void setBlockAndData(BlockPos const&, FullBlock, int, Entity*);
+    bool setBlockAndData(BlockPos const&, FullBlock, int, Entity*);
     void setBlock(BlockPos const&, BlockID, int);
     void setBlockAndData(BlockPos const&, FullBlock, int, Entity*, std::unique_ptr<BlockEntity, std::default_delete<BlockEntity>>);
     void setBlockAndData(BlockPos const&, BlockID, unsigned char, int, Entity*);

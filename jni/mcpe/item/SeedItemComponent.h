@@ -16,7 +16,6 @@ public:
 	/* 0x00 */ Item& item;
 	/* 0x04 */ unsigned char cropResult;
 	/* 0x05 */ unsigned char plantAt;
-	/* 0x06 */ short whoknows;
 	/* size = 0x08 */
 
 	SeedItemComponent(Item&);
