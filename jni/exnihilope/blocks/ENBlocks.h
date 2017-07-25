@@ -15,4 +15,5 @@ public:
 	static void initBlockItems();
 	static void initGraphics();
 	static void initCreativeBlocks();
+	static int getNextBlockId();
 };
