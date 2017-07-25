@@ -1,8 +1,8 @@
 #pragma once
 
-#include "mcpe/block/EntityBlock.h"
+#include "../blockentity/BlockEntityBase.h"
 
-class BlockInfestedLeaves : public EntityBlock {
+class BlockInfestedLeaves : public BlockEntityBase {
 public:
 	BlockInfestedLeaves(const std::string&, int);
 	virtual ItemInstance asItemInstance(BlockSource&, const BlockPos&, int) const;
@@ -11,6 +11,7 @@ public:
 	virtual int getVariant(int) const;
 	virtual unsigned int getColor(BlockSource&, const BlockPos&, unsigned char) const;
 	virtual bool isSeasonTinted(BlockSource&, const BlockPos&) const;
+	virtual std::unique_ptr<BlockEntity> createBlockEntity(const BlockPos&);
 
 	static void infestLeafBlock(BlockSource&, const BlockPos&);
 };

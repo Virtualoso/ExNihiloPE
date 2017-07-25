@@ -12,6 +12,7 @@
 #include "mcpe/block/Block.h"
 #include "mcpe/item/Item.h"
 #include "mcpe/level/BlockPos.h"
+#include "mcpe/block/entity/BlockEntityFactory.h"
 
 #include "exnihilope/ExNihiloPE.h"
 #include "exnihilope/items/ENItems.h"
@@ -19,6 +20,8 @@
 #include "exnihilope/ExNihiloPERecipes.h"
 #include "exnihilope/handlers/HandlerHammer.h"
 #include "exnihilope/handlers/HandlerCrook.h"
+#include "exnihilope/blockentity/BlockEntityRegistry.h"
+#include "exnihilope/blockentity/BlockEntityBase.h"
 
 #define LOG_TAG "ExNihilo-PE"
 #define LOG(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
@@ -111,6 +114,19 @@ void Block$playerDestroy(Block* self, Player* miner, const BlockPos& pos, int au
 		Block$_playerDestroy(self, miner, pos, aux);
 }
 
+std::unique_ptr<BlockEntity> (*_BlockEntityFactory$createBlockEntity)(BlockEntityType, const BlockPos&, BlockID);
+std::unique_ptr<BlockEntity> BlockEntityFactory$createBlockEntity(BlockEntityType type, const BlockPos& pos, BlockID id) {
+	std::unique_ptr<BlockEntity> retval = _BlockEntityFactory$createBlockEntity(type, pos, id);
+	if(retval)
+		return retval;
+
+	for(BlockEntityBase* owner : BlockEntityRegistry::owners) {
+		if(owner->getBlockEntityType() == type)
+			return owner->createBlockEntity(pos);
+	}
+	return retval;
+}
+
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)  {
 	LOG("Function Hooking Started");
@@ -124,6 +140,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)  {
 	MSHookFunction((void*) &Localization::loadFromPack, (void*) &Localization$loadFromPack, (void**) &_Localization$loadFromPack);
 	MSHookFunction((void*) &Localization::loadFromResourcePackManager, (void*) &Localization$loadFromResourcePackManager, (void**) &_Localization$loadFromResourcePackManager);
 	MSHookFunction((void*) &Block::playerDestroy, (void*) &Block$playerDestroy, (void**) &Block$_playerDestroy);
+	MSHookFunction((void*) &BlockEntityFactory::createBlockEntity, (void*) &BlockEntityFactory$createBlockEntity, (void**) &_BlockEntityFactory$createBlockEntity);
 
 	return JNI_VERSION_1_6;
 }

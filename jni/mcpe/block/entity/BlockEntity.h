@@ -41,11 +41,15 @@ public:
     // virtual
     virtual ~BlockEntity();
     virtual void load(CompoundTag const&);
-    virtual bool save(CompoundTag&);
+    virtual bool save(CompoundTag&) const;
+	virtual void* saveItemInstanceData(CompoundTag&);
+	virtual void* saveBlockData(CompoundTag&, BlockSource&) const;
+	virtual void loadBlockData(const CompoundTag&, BlockSource&);
     virtual void tick(BlockSource&);
     virtual bool isFinished();
     virtual void onChanged(BlockSource&);
     virtual bool isMovable();
+	virtual bool isCustomNameSaved();
     virtual void* getUpdatePacket(BlockSource&);
     virtual void onUpdatePacket(CompoundTag const&, BlockSource&);
     virtual void onMove();
@@ -57,6 +61,8 @@ public:
     virtual bool hasAlphaLayer() const;
     virtual void* getCrackEntity(BlockSource&, BlockPos const&);
     virtual std::string getDebugText(std::vector<std::string>&);
+	virtual std::string getCustomName() const;
+	virtual std::string getName() const;
 
     // non virtual
     BlockEntity(BlockEntityType, BlockPos const&, std::string const&);

@@ -1,5 +1,7 @@
 #include "BlockInfestedLeaves.h"
 
+#include "../blockentity/BlockEntityInfestedLeaves.h"
+
 #include "mcpe/item/ItemInstance.h"
 #include "mcpe/level/BlockPos.h"
 #include "mcpe/level/BlockSource.h"
@@ -8,13 +10,13 @@
 #include "mcpe/level/Level.h"
 #include "mcpe/block/Block.h"
 
-BlockInfestedLeaves::BlockInfestedLeaves(const std::string& name, int id) : EntityBlock(name, id, Material::getMaterial(MaterialType::PLANT)) {
+BlockInfestedLeaves::BlockInfestedLeaves(const std::string& name, int id) : BlockEntityBase(name, id, Material::getMaterial(MaterialType::PLANT)) {
 	setSolid(false);
 	setPushesOutItems(true);
 	renderLayer = (BlockRenderLayer) 5;
 	unknown2 = 0.8F;
 	properties |= 0x2000020;
-	blockEntityType = BlockEntityType::None;
+	blockEntityType = BlockEntityType::InfestedLeaves;
 }
 
 void BlockInfestedLeaves::infestLeafBlock(BlockSource& world, const BlockPos& pos) {
@@ -59,4 +61,8 @@ void BlockInfestedLeaves::playerDestroy(Player* harvester, const BlockPos& pos, 
 		
 		//block entity stuff here eventually
 	}
+}
+
+std::unique_ptr<BlockEntity> BlockInfestedLeaves::createBlockEntity(const BlockPos& pos) {
+	return std::unique_ptr<BlockEntity>(new BlockEntityInfestedLeaves(pos));
 }

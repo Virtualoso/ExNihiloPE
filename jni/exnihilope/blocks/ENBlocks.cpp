@@ -7,6 +7,7 @@
 
 #include "BlockBaseFalling.h"
 #include "BlockInfestedLeaves.h"
+#include "../blockentity/BlockEntityRegistry.h"
 
 Block* ENBlocks::dust;
 Block* ENBlocks::netherrackCrushed;
@@ -35,6 +36,7 @@ void ENBlocks::init() {
 
 	infestedLeaves = &registerBlock<BlockInfestedLeaves>("blockInfestedLeaves", getNextBlockId());
 	infestedLeaves->setCategory(CreativeItemCategory::DECORATIONS);
+	BlockEntityRegistry::registerBlockEntity((BlockInfestedLeaves*)infestedLeaves, "InfestedLeaves");
 
 	crucible = &registerBlock<Block>("blockCrucible", getNextBlockId(), Material::getMaterial(MaterialType::STONE));
 	crucible->setCategory(CreativeItemCategory::BLOCKS);

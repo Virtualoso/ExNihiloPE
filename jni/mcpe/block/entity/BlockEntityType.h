@@ -26,5 +26,8 @@ enum class BlockEntityType : int {
     EndPortal = 22,
     EnderChest = 23,
     EndGateway = 24,
+	CommandBlock = 26,
     StructureBlock = 32,
+
+	InfestedLeaves = 512
 };
