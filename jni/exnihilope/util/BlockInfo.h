@@ -10,22 +10,22 @@ class ItemInstance;
 class BlockInfo {
 private:
 	Block* block;
-    int meta;
+	int meta;
 
 public:
-    BlockInfo(Block*, int);
+	BlockInfo(Block*, int);
 	BlockInfo(const FullBlock&);
-    BlockInfo(ItemInstance*);
-    BlockInfo(const std::string&);
-    
+	BlockInfo(ItemInstance*);
+	BlockInfo(const std::string&);
+	
 	std::string toString();
-    FullBlock getBlockState();
-    CompoundTag* writeToNBT(CompoundTag*);
-    
+	FullBlock getBlockState();
+	CompoundTag* writeToNBT(CompoundTag*);
+	
 	static BlockInfo* readFromNBT(CompoundTag*);
 
-    int hashCode();
-    bool equals(BlockInfo*);
+	int hashCode();
+	bool equals(BlockInfo*);
 
 	static bool areEqual(BlockInfo*, BlockInfo*);
 

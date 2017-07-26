@@ -1,5 +1,5 @@
 #pragma once
 	
 enum class GameType {
-    SURVIVAL, CREATIVE
+	SURVIVAL, CREATIVE
 };

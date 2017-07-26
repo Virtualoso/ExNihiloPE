@@ -9,38 +9,38 @@ class Vec3 {
 
 public:
 
-    float x, y, z;
+	float x, y, z;
 
-    Vec3() { x = y = z = 0.0 / 0.0; }
-    Vec3(float x, float y, float z) : x(x), y(y), z(z) { }
-    Vec3(BlockPos const&);
-    Vec3(Pos const&);
+	Vec3() { x = y = z = 0.0 / 0.0; }
+	Vec3(float x, float y, float z) : x(x), y(y), z(z) { }
+	Vec3(BlockPos const&);
+	Vec3(Pos const&);
 
-    bool isNan() const;
+	bool isNan() const;
 
-    Vec2 xz() const;
+	Vec2 xz() const;
 
-    float minComponent() const;
-    float maxComponent() const;
+	float minComponent() const;
+	float maxComponent() const;
 
-    std::string toString() const;
+	std::string toString() const;
 
-    static Vec3 clamp(Vec3 const&, Vec3 const&, Vec3 const&);
-    static Vec3 clampAlongNormal(Vec3 const&, Vec3 const&, Vec3 const&, Vec3 const&, Vec3&);
+	static Vec3 clamp(Vec3 const&, Vec3 const&, Vec3 const&);
+	static Vec3 clampAlongNormal(Vec3 const&, Vec3 const&, Vec3 const&, Vec3 const&, Vec3&);
 
-    static Vec3 directionFromRotation(Vec2 const&);
-    static Vec3 directionFromRotation(float, float);
-    static Vec3 rotationFromDirection(Vec3 const&);
+	static Vec3 directionFromRotation(Vec2 const&);
+	static Vec3 directionFromRotation(float, float);
+	static Vec3 rotationFromDirection(Vec3 const&);
 
-    static Vec3 ZERO;
-    static Vec3 ONE;
-    static Vec3 UNIT_X;
-    static Vec3 NEG_UNIT_X;
-    static Vec3 UNIT_Y;
-    static Vec3 NEG_UNIT_Y;
-    static Vec3 UNIT_Z;
-    static Vec3 NEG_UNIT_Z;
-    static Vec3 MAX;
-    static Vec3 MIN;
+	static Vec3 ZERO;
+	static Vec3 ONE;
+	static Vec3 UNIT_X;
+	static Vec3 NEG_UNIT_X;
+	static Vec3 UNIT_Y;
+	static Vec3 NEG_UNIT_Y;
+	static Vec3 UNIT_Z;
+	static Vec3 NEG_UNIT_Z;
+	static Vec3 MAX;
+	static Vec3 MIN;
 
 };

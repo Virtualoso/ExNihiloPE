@@ -3,5 +3,5 @@
 #pragma once
 
 struct RectangleArea {
-    float x, y, w, h;
+	float x, y, w, h;
 };

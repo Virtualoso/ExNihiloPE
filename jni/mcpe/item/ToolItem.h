@@ -7,9 +7,9 @@ public:
 	float efficiencyOnProperMaterial = 4.0F; // 108
 	Item::Tier* toolMaterial; // 112
 	float damageVsEntity; // 116
-    std::vector<Block*> validBlocks; // 120
+	std::vector<Block*> validBlocks; // 120
 
-    ToolItem(const std::string&, short, float, Item::Tier, std::vector<Block*>);
+	ToolItem(const std::string&, short, float, Item::Tier, std::vector<Block*>);
 	virtual int getAttackDamage();
 	virtual bool isHandEquipped() const;
 	virtual void appendFormattedHovertext(const ItemInstance&, Level&, std::string&, bool) const;

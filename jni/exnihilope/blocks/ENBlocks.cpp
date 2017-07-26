@@ -79,7 +79,7 @@ void ENBlocks::initGraphics() {
 	BlockGraphics::mBlocks[infestedLeaves->blockId]->setSoundType(BlockSoundType::GRASS);
 
 	BlockGraphics::mBlocks[crucible->blockId] = new BlockGraphics("stone");
-    BlockGraphics::mBlocks[crucible->blockId]->setBlockShape(BlockShape::CAULDRON);
+	BlockGraphics::mBlocks[crucible->blockId]->setBlockShape(BlockShape::CAULDRON);
 	BlockGraphics::mBlocks[crucible->blockId]->setTextureItem("blockCrucible");
 	BlockGraphics::mBlocks[crucible->blockId]->setSoundType(BlockSoundType::STONE);
 }

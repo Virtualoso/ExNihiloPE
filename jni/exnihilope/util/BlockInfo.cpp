@@ -83,12 +83,12 @@ bool BlockInfo::equals(BlockInfo* info) {
 bool BlockInfo::areEqual(BlockInfo* block1, BlockInfo* block2) {
 	if (block1 == NULL && block2 == NULL)
    		return true;
-    	
+		
    	if (block1 == NULL && block2 != NULL)
    		return false;
-    	
+		
    	if (block1 != NULL && block2 == NULL)
    		return false;
-    	
+		
    	return block1->equals(block2);
 }

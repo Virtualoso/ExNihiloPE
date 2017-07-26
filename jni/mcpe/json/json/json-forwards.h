@@ -146,19 +146,19 @@ license you like.
 
 #if defined(_MSC_VER) // MSVC
 #  if _MSC_VER <= 1200 // MSVC 6
-    // Microsoft Visual Studio 6 only support conversion from __int64 to double
-    // (no conversion from unsigned __int64).
-#    define JSON_USE_INT64_DOUBLE_CONVERSION 1
-    // Disable warning 4786 for VS6 caused by STL (identifier was truncated to '255'
-    // characters in the debug information)
-    // All projects I've ever seen with VS6 were using this globally (not bothering
-    // with pragma push/pop).
-#    pragma warning(disable : 4786)
+	// Microsoft Visual Studio 6 only support conversion from __int64 to double
+	// (no conversion from unsigned __int64).
+#	define JSON_USE_INT64_DOUBLE_CONVERSION 1
+	// Disable warning 4786 for VS6 caused by STL (identifier was truncated to '255'
+	// characters in the debug information)
+	// All projects I've ever seen with VS6 were using this globally (not bothering
+	// with pragma push/pop).
+#	pragma warning(disable : 4786)
 #  endif // MSVC 6
 
 #  if _MSC_VER >= 1500 // MSVC 2008
-    /// Indicates that the following function is deprecated.
-#    define JSONCPP_DEPRECATED(message) __declspec(deprecated(message))
+	/// Indicates that the following function is deprecated.
+#	define JSONCPP_DEPRECATED(message) __declspec(deprecated(message))
 #  endif
 
 #endif // defined(_MSC_VER)
@@ -207,9 +207,9 @@ license you like.
 #ifdef __clang__
 #elif defined __GNUC__ // not clang (gcc comes later since clang emulates gcc)
 #  if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5))
-#    define JSONCPP_DEPRECATED(message)  __attribute__ ((deprecated(message)))
+#	define JSONCPP_DEPRECATED(message)  __attribute__ ((deprecated(message)))
 #  elif (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
-#    define JSONCPP_DEPRECATED(message)  __attribute__((__deprecated__))
+#	define JSONCPP_DEPRECATED(message)  __attribute__((__deprecated__))
 #  endif  // GNUC version
 #endif // __clang__ || __GNUC__
 
@@ -238,12 +238,12 @@ typedef unsigned int UInt;
 typedef int LargestInt;
 typedef unsigned int LargestUInt;
 #undef JSON_HAS_INT64
-#else                 // if defined(JSON_NO_INT64)
+#else				 // if defined(JSON_NO_INT64)
 // For Microsoft Visual use specific types as long long is not supported
 #if defined(_MSC_VER) // Microsoft Visual Studio
 typedef __int64 Int64;
 typedef unsigned __int64 UInt64;
-#else                 // if defined(_MSC_VER) // Other platforms, use long long
+#else				 // if defined(_MSC_VER) // Other platforms, use long long
 typedef int64_t Int64;
 typedef uint64_t UInt64;
 #endif // if defined(_MSC_VER)
@@ -252,17 +252,17 @@ typedef UInt64 LargestUInt;
 #define JSON_HAS_INT64
 #endif // if defined(JSON_NO_INT64)
 #if JSONCPP_USING_SECURE_MEMORY
-#define JSONCPP_STRING        std::basic_string<char, std::char_traits<char>, Json::SecureAllocator<char> >
+#define JSONCPP_STRING		std::basic_string<char, std::char_traits<char>, Json::SecureAllocator<char> >
 #define JSONCPP_OSTRINGSTREAM std::basic_ostringstream<char, std::char_traits<char>, Json::SecureAllocator<char> >
-#define JSONCPP_OSTREAM       std::basic_ostream<char, std::char_traits<char>>
+#define JSONCPP_OSTREAM	   std::basic_ostream<char, std::char_traits<char>>
 #define JSONCPP_ISTRINGSTREAM std::basic_istringstream<char, std::char_traits<char>, Json::SecureAllocator<char> >
-#define JSONCPP_ISTREAM       std::istream
+#define JSONCPP_ISTREAM	   std::istream
 #else
-#define JSONCPP_STRING        std::string
+#define JSONCPP_STRING		std::string
 #define JSONCPP_OSTRINGSTREAM std::ostringstream
-#define JSONCPP_OSTREAM       std::ostream
+#define JSONCPP_OSTREAM	   std::ostream
 #define JSONCPP_ISTRINGSTREAM std::istringstream
-#define JSONCPP_ISTREAM       std::istream
+#define JSONCPP_ISTREAM	   std::istream
 #endif // if JSONCPP_USING_SECURE_MEMORY
 } // end namespace Json
 

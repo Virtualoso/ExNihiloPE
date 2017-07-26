@@ -179,19 +179,19 @@ license you like.
 
 #if defined(_MSC_VER) // MSVC
 #  if _MSC_VER <= 1200 // MSVC 6
-    // Microsoft Visual Studio 6 only support conversion from __int64 to double
-    // (no conversion from unsigned __int64).
-#    define JSON_USE_INT64_DOUBLE_CONVERSION 1
-    // Disable warning 4786 for VS6 caused by STL (identifier was truncated to '255'
-    // characters in the debug information)
-    // All projects I've ever seen with VS6 were using this globally (not bothering
-    // with pragma push/pop).
-#    pragma warning(disable : 4786)
+	// Microsoft Visual Studio 6 only support conversion from __int64 to double
+	// (no conversion from unsigned __int64).
+#	define JSON_USE_INT64_DOUBLE_CONVERSION 1
+	// Disable warning 4786 for VS6 caused by STL (identifier was truncated to '255'
+	// characters in the debug information)
+	// All projects I've ever seen with VS6 were using this globally (not bothering
+	// with pragma push/pop).
+#	pragma warning(disable : 4786)
 #  endif // MSVC 6
 
 #  if _MSC_VER >= 1500 // MSVC 2008
-    /// Indicates that the following function is deprecated.
-#    define JSONCPP_DEPRECATED(message) __declspec(deprecated(message))
+	/// Indicates that the following function is deprecated.
+#	define JSONCPP_DEPRECATED(message) __declspec(deprecated(message))
 #  endif
 
 #endif // defined(_MSC_VER)
@@ -240,9 +240,9 @@ license you like.
 #ifdef __clang__
 #elif defined __GNUC__ // not clang (gcc comes later since clang emulates gcc)
 #  if (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5))
-#    define JSONCPP_DEPRECATED(message)  __attribute__ ((deprecated(message)))
+#	define JSONCPP_DEPRECATED(message)  __attribute__ ((deprecated(message)))
 #  elif (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
-#    define JSONCPP_DEPRECATED(message)  __attribute__((__deprecated__))
+#	define JSONCPP_DEPRECATED(message)  __attribute__((__deprecated__))
 #  endif  // GNUC version
 #endif // __clang__ || __GNUC__
 
@@ -271,12 +271,12 @@ typedef unsigned int UInt;
 typedef int LargestInt;
 typedef unsigned int LargestUInt;
 #undef JSON_HAS_INT64
-#else                 // if defined(JSON_NO_INT64)
+#else				 // if defined(JSON_NO_INT64)
 // For Microsoft Visual use specific types as long long is not supported
 #if defined(_MSC_VER) // Microsoft Visual Studio
 typedef __int64 Int64;
 typedef unsigned __int64 UInt64;
-#else                 // if defined(_MSC_VER) // Other platforms, use long long
+#else				 // if defined(_MSC_VER) // Other platforms, use long long
 typedef int64_t Int64;
 typedef uint64_t UInt64;
 #endif // if defined(_MSC_VER)
@@ -285,17 +285,17 @@ typedef UInt64 LargestUInt;
 #define JSON_HAS_INT64
 #endif // if defined(JSON_NO_INT64)
 #if JSONCPP_USING_SECURE_MEMORY
-#define JSONCPP_STRING        std::basic_string<char, std::char_traits<char>, Json::SecureAllocator<char> >
+#define JSONCPP_STRING		std::basic_string<char, std::char_traits<char>, Json::SecureAllocator<char> >
 #define JSONCPP_OSTRINGSTREAM std::basic_ostringstream<char, std::char_traits<char>, Json::SecureAllocator<char> >
-#define JSONCPP_OSTREAM       std::basic_ostream<char, std::char_traits<char>>
+#define JSONCPP_OSTREAM	   std::basic_ostream<char, std::char_traits<char>>
 #define JSONCPP_ISTRINGSTREAM std::basic_istringstream<char, std::char_traits<char>, Json::SecureAllocator<char> >
-#define JSONCPP_ISTREAM       std::istream
+#define JSONCPP_ISTREAM	   std::istream
 #else
-#define JSONCPP_STRING        std::string
+#define JSONCPP_STRING		std::string
 #define JSONCPP_OSTRINGSTREAM std::ostringstream
-#define JSONCPP_OSTREAM       std::ostream
+#define JSONCPP_OSTREAM	   std::ostream
 #define JSONCPP_ISTRINGSTREAM std::istringstream
-#define JSONCPP_ISTREAM       std::istream
+#define JSONCPP_ISTREAM	   std::istream
 #endif // if JSONCPP_USING_SECURE_MEMORY
 } // end namespace Json
 
@@ -469,11 +469,11 @@ public:
 // b) possibly improve optimization opportunities.
 #if !defined(JSONCPP_NORETURN)
 #  if defined(_MSC_VER)
-#    define JSONCPP_NORETURN __declspec(noreturn)
+#	define JSONCPP_NORETURN __declspec(noreturn)
 #  elif defined(__GNUC__)
-#    define JSONCPP_NORETURN __attribute__ ((__noreturn__))
+#	define JSONCPP_NORETURN __attribute__ ((__noreturn__))
 #  else
-#    define JSONCPP_NORETURN
+#	define JSONCPP_NORETURN
 #  endif
 #endif
 
@@ -534,17 +534,17 @@ JSONCPP_NORETURN void throwLogicError(JSONCPP_STRING const& msg);
  */
 enum ValueType {
   nullValue = 0, ///< 'null' value
-  intValue,      ///< signed integer value
-  uintValue,     ///< unsigned integer value
-  realValue,     ///< double value
+  intValue,	  ///< signed integer value
+  uintValue,	 ///< unsigned integer value
+  realValue,	 ///< double value
   stringValue,   ///< UTF-8 string value
   booleanValue,  ///< bool value
-  arrayValue,    ///< array value (ordered list)
-  objectValue    ///< object value (collection of name/value pairs).
+  arrayValue,	///< array value (ordered list)
+  objectValue	///< object value (collection of name/value pairs).
 };
 
 enum CommentPlacement {
-  commentBefore = 0,      ///< a comment placed on the line before a value
+  commentBefore = 0,	  ///< a comment placed on the line before a value
   commentAfterOnSameLine, ///< a comment just after a value on the same line
   commentAfter, ///< a comment on the line after a value (only make sense for
   /// root value)
@@ -663,45 +663,45 @@ private:
 #ifndef JSONCPP_DOC_EXCLUDE_IMPLEMENTATION
   class CZString {
   public:
-    enum DuplicationPolicy {
-      noDuplication = 0,
-      duplicate,
-      duplicateOnCopy
-    };
-    CZString(ArrayIndex index);
-    CZString(char const* str, unsigned length, DuplicationPolicy allocate);
-    CZString(CZString const& other);
+	enum DuplicationPolicy {
+	  noDuplication = 0,
+	  duplicate,
+	  duplicateOnCopy
+	};
+	CZString(ArrayIndex index);
+	CZString(char const* str, unsigned length, DuplicationPolicy allocate);
+	CZString(CZString const& other);
 #if JSON_HAS_RVALUE_REFERENCES
-    CZString(CZString&& other);
+	CZString(CZString&& other);
 #endif
-    ~CZString();
-    CZString& operator=(const CZString& other);
+	~CZString();
+	CZString& operator=(const CZString& other);
 
 #if JSON_HAS_RVALUE_REFERENCES
-    CZString& operator=(CZString&& other);
+	CZString& operator=(CZString&& other);
 #endif
 
-    bool operator<(CZString const& other) const;
-    bool operator==(CZString const& other) const;
-    ArrayIndex index() const;
-    //const char* c_str() const; ///< \deprecated
-    char const* data() const;
-    unsigned length() const;
-    bool isStaticString() const;
+	bool operator<(CZString const& other) const;
+	bool operator==(CZString const& other) const;
+	ArrayIndex index() const;
+	//const char* c_str() const; ///< \deprecated
+	char const* data() const;
+	unsigned length() const;
+	bool isStaticString() const;
 
   private:
-    void swap(CZString& other);
+	void swap(CZString& other);
 
-    struct StringStorage {
-      unsigned policy_: 2;
-      unsigned length_: 30; // 1GB max
-    };
+	struct StringStorage {
+	  unsigned policy_: 2;
+	  unsigned length_: 30; // 1GB max
+	};
 
-    char const* cstr_;  // actually, a prefixed string, unless policy is noDup
-    union {
-      ArrayIndex index_;
-      StringStorage storage_;
-    };
+	char const* cstr_;  // actually, a prefixed string, unless policy is noDup
+	union {
+	  ArrayIndex index_;
+	  StringStorage storage_;
+	};
   };
 
 public:
@@ -715,13 +715,13 @@ public:
 public:
   /** \brief Create a default Value of the given type.
 
-    This is a very useful constructor.
-    To create an empty array, pass arrayValue.
-    To create an empty object, pass objectValue.
-    Another Value can then be set to this one by assignment.
+	This is a very useful constructor.
+	To create an empty array, pass arrayValue.
+	To create an empty object, pass objectValue.
+	Another Value can then be set to this one by assignment.
 This is useful since clear() and resize() will not alter types.
 
-    Examples:
+	Examples:
 \code
 Json::Value null_value; // null
 Json::Value arr_value(Json::arrayValue); // []
@@ -804,7 +804,7 @@ Json::Value obj_value(Json::objectValue); // {}
    *  \return false if !string. (Seg-fault if str or end are NULL.)
    */
   bool getString(
-      char const** begin, char const** end) const;
+	  char const** begin, char const** end) const;
 #ifdef JSON_USE_CPPTL
   CppTL::ConstString asConstString() const;
 #endif
@@ -973,18 +973,18 @@ Json::Value obj_value(Json::objectValue); // {}
   bool removeMember(const char* key, Value* removed);
   /** \brief Remove the named map member.
 
-      Update 'removed' iff removed.
-      \param key may contain embedded nulls.
-      \return true iff removed (no exceptions)
+	  Update 'removed' iff removed.
+	  \param key may contain embedded nulls.
+	  \return true iff removed (no exceptions)
   */
   bool removeMember(JSONCPP_STRING const& key, Value* removed);
   /// Same as removeMember(JSONCPP_STRING const& key, Value* removed)
   bool removeMember(const char* begin, const char* end, Value* removed);
   /** \brief Remove the indexed array element.
 
-      O(n) expensive operations.
-      Update 'removed' iff removed.
-      \return true iff removed (no exceptions)
+	  O(n) expensive operations.
+	  Update 'removed' iff removed.
+	  \return true iff removed (no exceptions)
   */
   bool removeIndex(ArrayIndex i, Value* removed);
 
@@ -1009,8 +1009,8 @@ Json::Value obj_value(Json::objectValue); // {}
   Members getMemberNames() const;
 
   //# ifdef JSON_USE_CPPTL
-  //      EnumMemberNames enumMemberNames() const;
-  //      EnumValues enumValues() const;
+  //	  EnumMemberNames enumMemberNames() const;
+  //	  EnumValues enumValues() const;
   //# endif
 
   /// \deprecated Always pass len.
@@ -1046,12 +1046,12 @@ private:
   Value& resolveReference(const char* key, const char* end);
 
   struct CommentInfo {
-    CommentInfo();
-    ~CommentInfo();
+	CommentInfo();
+	~CommentInfo();
 
-    void setComment(const char* text, size_t len);
+	void setComment(const char* text, size_t len);
 
-    char* comment_;
+	char* comment_;
   };
 
   // struct MemberNamesTransform
@@ -1059,21 +1059,21 @@ private:
   //   typedef const char *result_type;
   //   const char *operator()( const CZString &name ) const
   //   {
-  //      return name.c_str();
+  //	  return name.c_str();
   //   }
   //};
 
   union ValueHolder {
-    LargestInt int_;
-    LargestUInt uint_;
-    double real_;
-    bool bool_;
-    char* string_;  // actually ptr to unsigned, followed by str, unless !allocated_
-    ObjectValues* map_;
+	LargestInt int_;
+	LargestUInt uint_;
+	double real_;
+	bool bool_;
+	char* string_;  // actually ptr to unsigned, followed by str, unless !allocated_
+	ObjectValues* map_;
   } value_;
   ValueType type_ : 8;
   unsigned int allocated_ : 1; // Notes: if declared as bool, bitfield is useless.
-                               // If not allocated_, string_ must be null-terminated.
+							   // If not allocated_, string_ must be null-terminated.
   CommentInfo* comments_;
 
   // [start, limit) byte offsets in the source JSON text from which this Value
@@ -1096,9 +1096,9 @@ public:
 
 private:
   enum Kind {
-    kindNone = 0,
-    kindIndex,
-    kindKey
+	kindNone = 0,
+	kindIndex,
+	kindKey
   };
   JSONCPP_STRING key_;
   ArrayIndex index_;
@@ -1119,11 +1119,11 @@ private:
 class JSON_API Path {
 public:
   Path(const JSONCPP_STRING& path,
-       const PathArgument& a1 = PathArgument(),
-       const PathArgument& a2 = PathArgument(),
-       const PathArgument& a3 = PathArgument(),
-       const PathArgument& a4 = PathArgument(),
-       const PathArgument& a5 = PathArgument());
+	   const PathArgument& a1 = PathArgument(),
+	   const PathArgument& a2 = PathArgument(),
+	   const PathArgument& a3 = PathArgument(),
+	   const PathArgument& a4 = PathArgument(),
+	   const PathArgument& a5 = PathArgument());
 
   const Value& resolve(const Value& root) const;
   Value resolve(const Value& root, const Value& defaultValue) const;
@@ -1137,9 +1137,9 @@ private:
 
   void makePath(const JSONCPP_STRING& path, const InArgs& in);
   void addPathInArg(const JSONCPP_STRING& path,
-                    const InArgs& in,
-                    InArgs::const_iterator& itInArg,
-                    PathArgument::Kind kind);
+					const InArgs& in,
+					InArgs::const_iterator& itInArg,
+					PathArgument::Kind kind);
   void invalidPath(const JSONCPP_STRING& path, int location);
 
   Args args_;
@@ -1160,7 +1160,7 @@ public:
   bool operator!=(const SelfType& other) const { return !isEqual(other); }
 
   difference_type operator-(const SelfType& other) const {
-    return other.computeDistance(*this);
+	return other.computeDistance(*this);
   }
 
   /// Return either the index or the member name of the referenced value as a
@@ -1235,25 +1235,25 @@ public:
   SelfType& operator=(const ValueIteratorBase& other);
 
   SelfType operator++(int) {
-    SelfType temp(*this);
-    ++*this;
-    return temp;
+	SelfType temp(*this);
+	++*this;
+	return temp;
   }
 
   SelfType operator--(int) {
-    SelfType temp(*this);
-    --*this;
-    return temp;
+	SelfType temp(*this);
+	--*this;
+	return temp;
   }
 
   SelfType& operator--() {
-    decrement();
-    return *this;
+	decrement();
+	return *this;
   }
 
   SelfType& operator++() {
-    increment();
-    return *this;
+	increment();
+	return *this;
   }
 
   reference operator*() const { return deref(); }
@@ -1286,25 +1286,25 @@ public:
   SelfType& operator=(const SelfType& other);
 
   SelfType operator++(int) {
-    SelfType temp(*this);
-    ++*this;
-    return temp;
+	SelfType temp(*this);
+	++*this;
+	return temp;
   }
 
   SelfType operator--(int) {
-    SelfType temp(*this);
-    --*this;
-    return temp;
+	SelfType temp(*this);
+	--*this;
+	return temp;
   }
 
   SelfType& operator--() {
-    decrement();
-    return *this;
+	decrement();
+	return *this;
   }
 
   SelfType& operator++() {
-    increment();
-    return *this;
+	increment();
+	return *this;
   }
 
   reference operator*() const { return deref(); }
@@ -1388,9 +1388,9 @@ public:
    *
    */
   struct StructuredError {
-    ptrdiff_t offset_start;
-    ptrdiff_t offset_limit;
-    JSONCPP_STRING message;
+	ptrdiff_t offset_start;
+	ptrdiff_t offset_limit;
+	JSONCPP_STRING message;
   };
 
   /** \brief Constructs a Reader allowing all features
@@ -1407,13 +1407,13 @@ public:
    * document.
    * \param document UTF-8 encoded string containing the document to read.
    * \param root [out] Contains the root value of the document if it was
-   *             successfully parsed.
+   *			 successfully parsed.
    * \param collectComments \c true to collect comment and allow writing them
    * back during
-   *                        serialization, \c false to discard comments.
-   *                        This parameter is ignored if
+   *						serialization, \c false to discard comments.
+   *						This parameter is ignored if
    * Features::allowComments_
-   *                        is \c false.
+   *						is \c false.
    * \return \c true if the document was successfully parsed, \c false if an
    * error occurred.
    */
@@ -1426,22 +1426,22 @@ public:
    document to read.
    * \param endDoc Pointer on the end of the UTF-8 encoded string of the
    document to read.
-   *               Must be >= beginDoc.
+   *			   Must be >= beginDoc.
    * \param root [out] Contains the root value of the document if it was
-   *             successfully parsed.
+   *			 successfully parsed.
    * \param collectComments \c true to collect comment and allow writing them
    back during
-   *                        serialization, \c false to discard comments.
-   *                        This parameter is ignored if
+   *						serialization, \c false to discard comments.
+   *						This parameter is ignored if
    Features::allowComments_
-   *                        is \c false.
+   *						is \c false.
    * \return \c true if the document was successfully parsed, \c false if an
    error occurred.
    */
   bool parse(const char* beginDoc,
-             const char* endDoc,
-             Value& root,
-             bool collectComments = true);
+			 const char* endDoc,
+			 Value& root,
+			 bool collectComments = true);
 
   /// \brief Parse from input stream.
   /// \see Json::operator>>(std::istream&, Json::Value&).
@@ -1451,9 +1451,9 @@ public:
    * document.
    * \return Formatted error message with the list of errors with their location
    * in
-   *         the parsed document. An empty string is returned if no error
+   *		 the parsed document. An empty string is returned if no error
    * occurred
-   *         during parsing.
+   *		 during parsing.
    * \deprecated Use getFormattedErrorMessages() instead (typo fix).
    */
   JSONCPP_DEPRECATED("Use getFormattedErrorMessages() instead.")
@@ -1463,18 +1463,18 @@ public:
    * document.
    * \return Formatted error message with the list of errors with their location
    * in
-   *         the parsed document. An empty string is returned if no error
+   *		 the parsed document. An empty string is returned if no error
    * occurred
-   *         during parsing.
+   *		 during parsing.
    */
   JSONCPP_STRING getFormattedErrorMessages() const;
 
   /** \brief Returns a vector of structured erros encounted while parsing.
    * \return A (possibly empty) vector of StructuredError objects. Currently
-   *         only one error can be returned, but the caller should tolerate
+   *		 only one error can be returned, but the caller should tolerate
    * multiple
-   *         errors.  This can occur if the parser recovers from a non-fatal
-   *         parse error and then encounters additional errors.
+   *		 errors.  This can occur if the parser recovers from a non-fatal
+   *		 parse error and then encounters additional errors.
    */
   std::vector<StructuredError> getStructuredErrors() const;
 
@@ -1503,34 +1503,34 @@ public:
 
 private:
   enum TokenType {
-    tokenEndOfStream = 0,
-    tokenObjectBegin,
-    tokenObjectEnd,
-    tokenArrayBegin,
-    tokenArrayEnd,
-    tokenString,
-    tokenNumber,
-    tokenTrue,
-    tokenFalse,
-    tokenNull,
-    tokenArraySeparator,
-    tokenMemberSeparator,
-    tokenComment,
-    tokenError
+	tokenEndOfStream = 0,
+	tokenObjectBegin,
+	tokenObjectEnd,
+	tokenArrayBegin,
+	tokenArrayEnd,
+	tokenString,
+	tokenNumber,
+	tokenTrue,
+	tokenFalse,
+	tokenNull,
+	tokenArraySeparator,
+	tokenMemberSeparator,
+	tokenComment,
+	tokenError
   };
 
   class Token {
   public:
-    TokenType type_;
-    Location start_;
-    Location end_;
+	TokenType type_;
+	Location start_;
+	Location end_;
   };
 
   class ErrorInfo {
   public:
-    Token token_;
-    JSONCPP_STRING message_;
-    Location extra_;
+	Token token_;
+	JSONCPP_STRING message_;
+	Location extra_;
   };
 
   typedef std::deque<ErrorInfo> Errors;
@@ -1553,18 +1553,18 @@ private:
   bool decodeDouble(Token& token);
   bool decodeDouble(Token& token, Value& decoded);
   bool decodeUnicodeCodePoint(Token& token,
-                              Location& current,
-                              Location end,
-                              unsigned int& unicode);
+							  Location& current,
+							  Location end,
+							  unsigned int& unicode);
   bool decodeUnicodeEscapeSequence(Token& token,
-                                   Location& current,
-                                   Location end,
-                                   unsigned int& unicode);
+								   Location& current,
+								   Location end,
+								   unsigned int& unicode);
   bool addError(const JSONCPP_STRING& message, Token& token, Location extra = 0);
   bool recoverFromError(TokenType skipUntilToken);
   bool addErrorAndRecover(const JSONCPP_STRING& message,
-                          Token& token,
-                          TokenType skipUntilToken);
+						  Token& token,
+						  TokenType skipUntilToken);
   void skipUntilSpace();
   Value& currentValue();
   Char getNextChar();
@@ -1601,26 +1601,26 @@ public:
    document to read.
    * \param endDoc Pointer on the end of the UTF-8 encoded string of the
    document to read.
-   *        Must be >= beginDoc.
+   *		Must be >= beginDoc.
    * \param root [out] Contains the root value of the document if it was
-   *             successfully parsed.
+   *			 successfully parsed.
    * \param errs [out] Formatted error messages (if not NULL)
-   *        a user friendly string that lists errors in the parsed
+   *		a user friendly string that lists errors in the parsed
    * document.
    * \return \c true if the document was successfully parsed, \c false if an
    error occurred.
    */
   virtual bool parse(
-      char const* beginDoc, char const* endDoc,
-      Value* root, JSONCPP_STRING* errs) = 0;
+	  char const* beginDoc, char const* endDoc,
+	  Value* root, JSONCPP_STRING* errs) = 0;
 
   class JSON_API Factory {
   public:
-    virtual ~Factory() {}
-    /** \brief Allocate a CharReader via operator new().
-     * \throw std::exception if something goes wrong (e.g. invalid settings)
-     */
-    virtual CharReader* newCharReader() const = 0;
+	virtual ~Factory() {}
+	/** \brief Allocate a CharReader via operator new().
+	 * \throw std::exception if something goes wrong (e.g. invalid settings)
+	 */
+	virtual CharReader* newCharReader() const = 0;
   };  // Factory
 };  // CharReader
 
@@ -1641,41 +1641,41 @@ public:
   // Note: We use a Json::Value so that we can add data-members to this class
   // without a major version bump.
   /** Configuration of this builder.
-    These are case-sensitive.
-    Available settings (case-sensitive):
-    - `"collectComments": false or true`
-      - true to collect comment and allow writing them
-        back during serialization, false to discard comments.
-        This parameter is ignored if allowComments is false.
-    - `"allowComments": false or true`
-      - true if comments are allowed.
-    - `"strictRoot": false or true`
-      - true if root must be either an array or an object value
-    - `"allowDroppedNullPlaceholders": false or true`
-      - true if dropped null placeholders are allowed. (See StreamWriterBuilder.)
-    - `"allowNumericKeys": false or true`
-      - true if numeric object keys are allowed.
-    - `"allowSingleQuotes": false or true`
-      - true if '' are allowed for strings (both keys and values)
-    - `"stackLimit": integer`
-      - Exceeding stackLimit (recursive depth of `readValue()`) will
-        cause an exception.
-      - This is a security issue (seg-faults caused by deeply nested JSON),
-        so the default is low.
-    - `"failIfExtra": false or true`
-      - If true, `parse()` returns false when extra non-whitespace trails
-        the JSON value in the input string.
-    - `"rejectDupKeys": false or true`
-      - If true, `parse()` returns false when a key is duplicated within an object.
-    - `"allowSpecialFloats": false or true`
-      - If true, special float values (NaNs and infinities) are allowed 
-        and their values are lossfree restorable.
+	These are case-sensitive.
+	Available settings (case-sensitive):
+	- `"collectComments": false or true`
+	  - true to collect comment and allow writing them
+		back during serialization, false to discard comments.
+		This parameter is ignored if allowComments is false.
+	- `"allowComments": false or true`
+	  - true if comments are allowed.
+	- `"strictRoot": false or true`
+	  - true if root must be either an array or an object value
+	- `"allowDroppedNullPlaceholders": false or true`
+	  - true if dropped null placeholders are allowed. (See StreamWriterBuilder.)
+	- `"allowNumericKeys": false or true`
+	  - true if numeric object keys are allowed.
+	- `"allowSingleQuotes": false or true`
+	  - true if '' are allowed for strings (both keys and values)
+	- `"stackLimit": integer`
+	  - Exceeding stackLimit (recursive depth of `readValue()`) will
+		cause an exception.
+	  - This is a security issue (seg-faults caused by deeply nested JSON),
+		so the default is low.
+	- `"failIfExtra": false or true`
+	  - If true, `parse()` returns false when extra non-whitespace trails
+		the JSON value in the input string.
+	- `"rejectDupKeys": false or true`
+	  - If true, `parse()` returns false when a key is duplicated within an object.
+	- `"allowSpecialFloats": false or true`
+	  - If true, special float values (NaNs and infinities) are allowed 
+		and their values are lossfree restorable.
 
-    You can examine 'settings_` yourself
-    to see the defaults. You can also write and read them just like any
-    JSON Value.
-    \sa setDefaults()
-    */
+	You can examine 'settings_` yourself
+	to see the defaults. You can also write and read them just like any
+	JSON Value.
+	\sa setDefaults()
+	*/
   Json::Value settings_;
 
   CharReaderBuilder();
@@ -1711,9 +1711,9 @@ public:
   * is convenient.
   */
 bool JSON_API parseFromStream(
-    CharReader::Factory const&,
-    JSONCPP_ISTREAM&,
-    Value* root, std::string* errs);
+	CharReader::Factory const&,
+	JSONCPP_ISTREAM&,
+	Value* root, std::string* errs);
 
 /** \brief Read from 'sin' into 'root'.
 
@@ -1730,9 +1730,9 @@ bool JSON_API parseFromStream(
  \verbatim
  {
  "dir": {
-     "file": {
-     // The input stream JSON would be nested here.
-     }
+	 "file": {
+	 // The input stream JSON would be nested here.
+	 }
  }
  }
  \endverbatim
@@ -1798,10 +1798,10 @@ Usage:
 \code
   using namespace Json;
   void writeToStdout(StreamWriter::Factory const& factory, Value const& value) {
-    std::unique_ptr<StreamWriter> const writer(
-      factory.newStreamWriter());
-    writer->write(value, &std::cout);
-    std::cout << std::endl;  // add lf and flush
+	std::unique_ptr<StreamWriter> const writer(
+	  factory.newStreamWriter());
+	writer->write(value, &std::cout);
+	std::cout << std::endl;  // add lf and flush
   }
 \endcode
 */
@@ -1812,10 +1812,10 @@ public:
   StreamWriter();
   virtual ~StreamWriter();
   /** Write Value into document as configured in sub-class.
-      Do not take ownership of sout, but maintain a reference during function.
-      \pre sout != NULL
-      \return zero on success (For now, we always return zero, so check the stream instead.)
-      \throw std::exception possibly, depending on configuration
+	  Do not take ownership of sout, but maintain a reference during function.
+	  \pre sout != NULL
+	  \return zero on success (For now, we always return zero, so check the stream instead.)
+	  \throw std::exception possibly, depending on configuration
    */
   virtual int write(Value const& root, JSONCPP_OSTREAM* sout) = 0;
 
@@ -1823,11 +1823,11 @@ public:
    */
   class JSON_API Factory {
   public:
-    virtual ~Factory();
-    /** \brief Allocate a CharReader via operator new().
-     * \throw std::exception if something goes wrong (e.g. invalid settings)
-     */
-    virtual StreamWriter* newStreamWriter() const = 0;
+	virtual ~Factory();
+	/** \brief Allocate a CharReader via operator new().
+	 * \throw std::exception if something goes wrong (e.g. invalid settings)
+	 */
+	virtual StreamWriter* newStreamWriter() const = 0;
   };  // Factory
 };  // StreamWriter
 
@@ -1847,7 +1847,7 @@ Usage:
   builder["commentStyle"] = "None";
   builder["indentation"] = "   ";  // or whatever you like
   std::unique_ptr<Json::StreamWriter> writer(
-      builder.newStreamWriter());
+	  builder.newStreamWriter());
   writer->write(value, &std::cout);
   std::cout << std::endl;  // add lf and flush
 \endcode
@@ -1857,26 +1857,26 @@ public:
   // Note: We use a Json::Value so that we can add data-members to this class
   // without a major version bump.
   /** Configuration of this builder.
-    Available settings (case-sensitive):
-    - "commentStyle": "None" or "All"
-    - "indentation":  "<anything>"
-    - "enableYAMLCompatibility": false or true
-      - slightly change the whitespace around colons
-    - "dropNullPlaceholders": false or true
-      - Drop the "null" string from the writer's output for nullValues.
-        Strictly speaking, this is not valid JSON. But when the output is being
-        fed to a browser's Javascript, it makes for smaller output and the
-        browser can handle the output just fine.
-    - "useSpecialFloats": false or true
-      - If true, outputs non-finite floating point values in the following way:
-        NaN values as "NaN", positive infinity as "Infinity", and negative infinity
-        as "-Infinity".
+	Available settings (case-sensitive):
+	- "commentStyle": "None" or "All"
+	- "indentation":  "<anything>"
+	- "enableYAMLCompatibility": false or true
+	  - slightly change the whitespace around colons
+	- "dropNullPlaceholders": false or true
+	  - Drop the "null" string from the writer's output for nullValues.
+		Strictly speaking, this is not valid JSON. But when the output is being
+		fed to a browser's Javascript, it makes for smaller output and the
+		browser can handle the output just fine.
+	- "useSpecialFloats": false or true
+	  - If true, outputs non-finite floating point values in the following way:
+		NaN values as "NaN", positive infinity as "Infinity", and negative infinity
+		as "-Infinity".
 
-    You can examine 'settings_` yourself
-    to see the defaults. You can also write and read them just like any
-    JSON Value.
-    \sa setDefaults()
-    */
+	You can examine 'settings_` yourself
+	to see the defaults. You can also write and read them just like any
+	JSON Value.
+	\sa setDefaults()
+	*/
   Json::Value settings_;
 
   StreamWriterBuilder();
@@ -1956,18 +1956,18 @@ private:
  *
  * The rules for line break and indent are as follow:
  * - Object value:
- *     - if empty then print {} without indent and line break
- *     - if not empty the print '{', line break & indent, print one value per
+ *	 - if empty then print {} without indent and line break
+ *	 - if not empty the print '{', line break & indent, print one value per
  *line
- *       and then unindent and line break and print '}'.
+ *	   and then unindent and line break and print '}'.
  * - Array value:
- *     - if empty then print [] without indent and line break
- *     - if the array contains no object value, empty array or some other value
+ *	 - if empty then print [] without indent and line break
+ *	 - if the array contains no object value, empty array or some other value
  *types,
- *       and all the values fit on one lines, then print the array on a single
+ *	   and all the values fit on one lines, then print the array on a single
  *line.
- *     - otherwise, it the values do not fit on one line, or the array contains
- *       object or non empty array, then print one value per line.
+ *	 - otherwise, it the values do not fit on one line, or the array contains
+ *	   object or non empty array, then print one value per line.
  *
  * If the Value have comments then they are outputed according to their
  *#CommentPlacement.
@@ -2013,22 +2013,22 @@ private:
 
 /** \brief Writes a Value in <a HREF="http://www.json.org">JSON</a> format in a
  human friendly way,
-     to a stream rather than to a string.
+	 to a stream rather than to a string.
  *
  * The rules for line break and indent are as follow:
  * - Object value:
- *     - if empty then print {} without indent and line break
- *     - if not empty the print '{', line break & indent, print one value per
+ *	 - if empty then print {} without indent and line break
+ *	 - if not empty the print '{', line break & indent, print one value per
  line
- *       and then unindent and line break and print '}'.
+ *	   and then unindent and line break and print '}'.
  * - Array value:
- *     - if empty then print [] without indent and line break
- *     - if the array contains no object value, empty array or some other value
+ *	 - if empty then print [] without indent and line break
+ *	 - if the array contains no object value, empty array or some other value
  types,
- *       and all the values fit on one lines, then print the array on a single
+ *	   and all the values fit on one lines, then print the array on a single
  line.
- *     - otherwise, it the values do not fit on one line, or the array contains
- *       object or non empty array, then print one value per line.
+ *	 - otherwise, it the values do not fit on one line, or the array contains
+ *	   object or non empty array, then print one value per line.
  *
  * If the Value have comments then they are outputed according to their
  #CommentPlacement.
@@ -2135,14 +2135,14 @@ JSON_API JSONCPP_OSTREAM& operator<<(JSONCPP_OSTREAM&, const Value& root);
 #if JSON_USE_EXCEPTION
 
 // @todo <= add detail about condition in exception
-# define JSON_ASSERT(condition)                                                \
+# define JSON_ASSERT(condition)												\
   {if (!(condition)) {Json::throwLogicError( "assert json failed" );}}
 
-# define JSON_FAIL_MESSAGE(message)                                            \
-  {                                                                            \
-    JSONCPP_OSTRINGSTREAM oss; oss << message;                                    \
-    Json::throwLogicError(oss.str());                                          \
-    abort();                                                                   \
+# define JSON_FAIL_MESSAGE(message)											\
+  {																			\
+	JSONCPP_OSTRINGSTREAM oss; oss << message;									\
+	Json::throwLogicError(oss.str());										  \
+	abort();																   \
   }
 
 #else // JSON_USE_EXCEPTION
@@ -2151,19 +2151,19 @@ JSON_API JSONCPP_OSTREAM& operator<<(JSONCPP_OSTREAM&, const Value& root);
 
 // The call to assert() will show the failure message in debug builds. In
 // release builds we abort, for a core-dump or debugger.
-# define JSON_FAIL_MESSAGE(message)                                            \
-  {                                                                            \
-    JSONCPP_OSTRINGSTREAM oss; oss << message;                                    \
-    assert(false && oss.str().c_str());                                        \
-    abort();                                                                   \
+# define JSON_FAIL_MESSAGE(message)											\
+  {																			\
+	JSONCPP_OSTRINGSTREAM oss; oss << message;									\
+	assert(false && oss.str().c_str());										\
+	abort();																   \
   }
 
 
 #endif
 
-#define JSON_ASSERT_MESSAGE(condition, message)                                \
-  if (!(condition)) {                                                          \
-    JSON_FAIL_MESSAGE(message);                                                \
+#define JSON_ASSERT_MESSAGE(condition, message)								\
+  if (!(condition)) {														  \
+	JSON_FAIL_MESSAGE(message);												\
   }
 
 #endif // CPPTL_JSON_ASSERTIONS_H_INCLUDED

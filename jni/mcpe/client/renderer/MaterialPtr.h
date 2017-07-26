@@ -12,27 +12,27 @@ class MaterialPtr {
 
 public:
 
-    RenderMaterialGroup* group;
-    RenderMaterial* material;
-    std::string name;
+	RenderMaterialGroup* group;
+	RenderMaterial* material;
+	std::string name;
 
-    MaterialPtr();
-    MaterialPtr(mce::MaterialPtr&&);
-    MaterialPtr(mce::RenderMaterialGroup&, std::string const&);
+	MaterialPtr();
+	MaterialPtr(mce::MaterialPtr&&);
+	MaterialPtr(mce::RenderMaterialGroup&, std::string const&);
 
-    ~MaterialPtr();
+	~MaterialPtr();
 
-    operator bool() const;
-    mce::MaterialPtr& operator=(mce::MaterialPtr&&);
+	operator bool() const;
+	mce::MaterialPtr& operator=(mce::MaterialPtr&&);
 
-    std::wstring getNameW() const;
+	std::wstring getNameW() const;
 
-    void _move(mce::MaterialPtr&&);
-    void _deref();
+	void _move(mce::MaterialPtr&&);
+	void _deref();
 
-    void onGroupReloaded();
+	void onGroupReloaded();
 
-    static MaterialPtr NONE;
+	static MaterialPtr NONE;
 
 };
 

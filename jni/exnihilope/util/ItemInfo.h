@@ -11,24 +11,24 @@ class ItemInstance;
 class ItemInfo {
 private:
 	Item* item;
-    int meta;
+	int meta;
 
 public:
 	static ItemInfo* getItemInfoFromStack(ItemInstance*);
-    
-    ItemInfo(ItemInstance*);
-    ItemInfo(Block*, int);
-    ItemInfo(const std::string&);
+	
+	ItemInfo(ItemInstance*);
+	ItemInfo(Block*, int);
+	ItemInfo(const std::string&);
 	ItemInfo(const FullBlock&);
-    
+	
 	std::string toString();
-    ItemInstance* getItemStack();
-    CompoundTag* writeToNBT(CompoundTag*);
-    
+	ItemInstance* getItemStack();
+	CompoundTag* writeToNBT(CompoundTag*);
+	
 	static ItemInfo* readFromNBT(CompoundTag*);
 
-    int hashCode();
-    bool equals(ItemInfo*);
+	int hashCode();
+	bool equals(ItemInfo*);
 
 	Item* getItem() { return item; }
 	int getMeta() { return meta; }

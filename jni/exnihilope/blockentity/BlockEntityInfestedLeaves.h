@@ -6,5 +6,5 @@ class BlockEntityInfestedLeaves : public BlockEntity {
 public:
 	BlockEntityInfestedLeaves(const BlockPos&);
 	
-    virtual ~BlockEntityInfestedLeaves();
+	virtual ~BlockEntityInfestedLeaves();
 };

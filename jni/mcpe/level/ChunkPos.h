@@ -7,14 +7,14 @@ class ChunkPos {
 
 public:
 
-    int x, int z;
+	int x, int z;
 
-    // non virtual
-    ChunkPos(BlockPos const&);
-    ChunkPos(Vec3 const&);
-    float distanceToSqr(Entity const&) const;
-    BlockPos getMiddleBlockPosition(int) const;
+	// non virtual
+	ChunkPos(BlockPos const&);
+	ChunkPos(Vec3 const&);
+	float distanceToSqr(Entity const&) const;
+	BlockPos getMiddleBlockPosition(int) const;
 
-    // static
-    static ChunkPos INVALID;
+	// static
+	static ChunkPos INVALID;
 };

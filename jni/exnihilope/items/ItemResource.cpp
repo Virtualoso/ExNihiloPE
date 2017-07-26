@@ -45,7 +45,7 @@ bool ItemResource::_useOn(ItemInstance& stack, Entity& player, BlockPos pos, sig
 	if (names[stack.data] == SILKWORM) {
 		Block* block = player.getRegion()->getBlock(pos);
 		if (block != NULL && (block == Block::mLeaves || block == Block::mLeaves2)) {
-		    //BlockInfestedLeaves::infestLeafBlock(player.getRegion(), pos);
+			//BlockInfestedLeaves::infestLeafBlock(player.getRegion(), pos);
 			stack.count--;
 			return true;
 		}

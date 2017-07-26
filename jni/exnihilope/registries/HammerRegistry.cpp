@@ -68,17 +68,17 @@ void HammerRegistry::addHammerRecipe(Block* block, int meta, ItemInstance* rewar
  * Adds a new Hammer recipe for use with Ex Nihilo hammers.
  * 
  * @param block
- *            Block
+ *			Block
  * @param meta
- *            Block meta
+ *			Block meta
  * @param reward
- *            Reward
+ *			Reward
  * @param miningLevel
- *            Mining level of hammer. 0 = Wood/Gold, 1 = Stone, 2 = Iron, 3 = Diamond. Can be higher, but will need corresponding tool material.
+ *			Mining level of hammer. 0 = Wood/Gold, 1 = Stone, 2 = Iron, 3 = Diamond. Can be higher, but will need corresponding tool material.
  * @param chance
- *            Chance of drop
+ *			Chance of drop
  * @param fortuneChance
- *            Chance of drop per level of fortune
+ *			Chance of drop per level of fortune
  */
 void HammerRegistry::registerRecipe(Block* block, int meta, ItemInstance* reward, int miningLevel, float chance, float fortuneChance) {
 	registerRecipe(block, meta, reward, miningLevel, chance, fortuneChance, false);

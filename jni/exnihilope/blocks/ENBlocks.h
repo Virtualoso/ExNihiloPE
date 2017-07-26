@@ -5,8 +5,8 @@ class Block;
 class ENBlocks {
 public:
 	static Block* dust;
-    static Block* netherrackCrushed;
-    static Block* endstoneCrushed;
+	static Block* netherrackCrushed;
+	static Block* endstoneCrushed;
 	static Block* barrelWood;
 	static Block* infestedLeaves;
 	static Block* crucible;
