@@ -5,6 +5,7 @@
 class BlockInfestedLeaves : public BlockEntityBase {
 public:
 	BlockInfestedLeaves(const std::string&, int);
+	virtual void onRemove(BlockSource&, const BlockPos&) const;
 	virtual ItemInstance asItemInstance(BlockSource&, const BlockPos&, int) const;
 	virtual void playerDestroy(Player*, const BlockPos&, int) const;
 	virtual Color getMapColor(BlockSource&, const BlockPos&) const;

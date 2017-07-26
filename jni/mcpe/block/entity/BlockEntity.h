@@ -34,8 +34,11 @@ public:
     /* 0x50 */ int runningId;
     /* 0x54 */ bool clientSideOnly;
     /* 0x55 */ bool movable;
+	/* 0x56 */ bool customNameSaved;
     /* 0x58 */ BlockEntityRendererId rendererId;
-    /* 0x5C */ bool changed;
+	/* 0x5C */ char customName[4];
+	/* 0x60 */ bool renderCustomName;
+    /* 0x61 */ bool changed;
     /* size = 0x60 */
 
     // virtual
@@ -51,6 +54,7 @@ public:
     virtual bool isMovable();
 	virtual bool isCustomNameSaved();
     virtual void* getUpdatePacket(BlockSource&);
+	virtual void onPlace(BlockSource&);
     virtual void onUpdatePacket(CompoundTag const&, BlockSource&);
     virtual void onMove();
     virtual void onRemoved(BlockSource&);
@@ -75,7 +79,7 @@ public:
     BlockPos getPosition();
     BlockEntityRendererId getRendererId();
     int getRunningId();
-    BlockEntityType getType();
+    BlockEntityType getType() const;
     bool isClientSideOnly();
     bool isInWorld();
     bool isType(BlockEntityType);

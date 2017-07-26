@@ -19,6 +19,12 @@ BlockInfestedLeaves::BlockInfestedLeaves(const std::string& name, int id) : Bloc
 	blockEntityType = BlockEntityType::InfestedLeaves;
 }
 
+void BlockInfestedLeaves::onRemove(BlockSource& world, const BlockPos& pos) const {
+	if(world.getBlockEntity(pos)->getType() == BlockEntityType::InfestedLeaves)
+		world.removeBlockEntity(pos);
+	Block::onRemove(world, pos);
+}
+
 void BlockInfestedLeaves::infestLeafBlock(BlockSource& world, const BlockPos& pos) {
 	/*IBlockState block = world.getBlockState(pos);
 
