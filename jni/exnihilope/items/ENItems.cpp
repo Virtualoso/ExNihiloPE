@@ -25,41 +25,41 @@ std::vector<ItemSeedBase*> ENItems::itemSeeds;
 void ENItems::init() {
 	registerItemIds();
 	
-	hammerWood = &registerItem<HammerBase>("hammerWood", getNextItemId(), 64, Item::Tier::WOOD);
+	hammerWood = registerItem<HammerBase>("hammerWood", getNextItemId(), 64, Item::Tier::WOOD);
 	hammerWood->setCategory(CreativeItemCategory::TOOLS);
 	
-	hammerStone = &registerItem<HammerBase>("hammerStone", getNextItemId(), 128, Item::Tier::STONE);
+	hammerStone = registerItem<HammerBase>("hammerStone", getNextItemId(), 128, Item::Tier::STONE);
 	hammerStone->setCategory(CreativeItemCategory::TOOLS);
 	
-	hammerIron = &registerItem<HammerBase>("hammerIron", getNextItemId(), 512, Item::Tier::IRON);
+	hammerIron = registerItem<HammerBase>("hammerIron", getNextItemId(), 512, Item::Tier::IRON);
 	hammerIron->setCategory(CreativeItemCategory::TOOLS);
 	
-	hammerDiamond = &registerItem<HammerBase>("hammerDiamond", getNextItemId(), 4096, Item::Tier::DIAMOND);
+	hammerDiamond = registerItem<HammerBase>("hammerDiamond", getNextItemId(), 4096, Item::Tier::DIAMOND);
 	hammerDiamond->setCategory(CreativeItemCategory::TOOLS);
 	
-	hammerGold = &registerItem<HammerBase>("hammerGold", getNextItemId(), 64, Item::Tier::GOLD);
+	hammerGold = registerItem<HammerBase>("hammerGold", getNextItemId(), 64, Item::Tier::GOLD);
 	hammerGold->setCategory(CreativeItemCategory::TOOLS);
 
-	crookWood = &registerItem<CrookBase>("crookWood", getNextItemId(), 64);
+	crookWood = registerItem<CrookBase>("crookWood", getNextItemId(), 64);
 	crookWood->setCategory(CreativeItemCategory::TOOLS);
 		
-	crookBone = &registerItem<CrookBase>("crookBone", getNextItemId(), 256);
+	crookBone = registerItem<CrookBase>("crookBone", getNextItemId(), 256);
 	crookBone->setCategory(CreativeItemCategory::TOOLS);
 
-	resources = &registerItem<ItemResource>("itemMaterial", getNextItemId());
+	resources = registerItem<ItemResource>("itemMaterial", getNextItemId());
 	
-	cookedSilkworm = &registerItem<ItemCookedSilkworm>("silkwormCooked", getNextItemId());
+	cookedSilkworm = registerItem<ItemCookedSilkworm>("silkwormCooked", getNextItemId());
 		
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedOak", getNextItemId(), Block::mSapling, 0));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedSpruce", getNextItemId(), Block::mSapling, 1));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedBirch", getNextItemId(), Block::mSapling, 2));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedJungle", getNextItemId(), Block::mSapling, 3));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedAcacia", getNextItemId(), Block::mSapling, 4));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedDarkOak", getNextItemId(), Block::mSapling, 5));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedCactus", getNextItemId(), Block::mCactus, 0));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedSugarcane", getNextItemId(), Block::mReeds, 0));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedCarrot", getNextItemId(), Block::mCarrotCrop, 0));
-	itemSeeds.emplace_back(&registerItem<ItemSeedBase>("itemSeedPotato", getNextItemId(), Block::mPotatoCrop, 0));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedOak", getNextItemId(), Block::mSapling, 0));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedSpruce", getNextItemId(), Block::mSapling, 1));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedBirch", getNextItemId(), Block::mSapling, 2));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedJungle", getNextItemId(), Block::mSapling, 3));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedAcacia", getNextItemId(), Block::mSapling, 4));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedDarkOak", getNextItemId(), Block::mSapling, 5));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedCactus", getNextItemId(), Block::mCactus, 0));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedSugarcane", getNextItemId(), Block::mReeds, 0));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedCarrot", getNextItemId(), Block::mCarrotCrop, 0));
+	itemSeeds.emplace_back(registerItem<ItemSeedBase>("itemSeedPotato", getNextItemId(), Block::mPotatoCrop, 0));
 }
 
 void ENItems::initCreativeItems() {

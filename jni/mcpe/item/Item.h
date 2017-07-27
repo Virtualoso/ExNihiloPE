@@ -366,14 +366,14 @@ public:
 };
 
 template <typename ItemType,typename...Args>
-ItemType& registerItem(std::string const&name,int id,const Args&...rest)
+ItemType* registerItem(std::string const&name,int id,const Args&...rest)
 {
 	std::string const item_name = Util::toLower(name);
 	if(Item::mItemLookupMap.count(item_name)!=0)
-		return *(ItemType*)Item::mItems[id + 0x100];
+		return (ItemType*)Item::mItems[id + 0x100];
 	
 	ItemType* new_instance = new ItemType(name,id,rest...);
 	Item::mItems[id + 0x100] = new_instance;
 	Item::mItemLookupMap.emplace(item_name,std::unique_ptr<Item>((Item*)new_instance));
-	return *new_instance;
+	return new_instance;
 }

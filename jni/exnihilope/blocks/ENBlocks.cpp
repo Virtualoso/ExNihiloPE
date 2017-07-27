@@ -17,28 +17,28 @@ Block* ENBlocks::infestedLeaves;
 Block* ENBlocks::crucible;
 
 void ENBlocks::init() {
-	dust = &registerBlock<BlockBaseFalling>("blockDust", getNextBlockId());
+	dust = registerBlock<BlockBaseFalling>("blockDust", getNextBlockId());
 	dust->setCategory(CreativeItemCategory::BLOCKS);
 	dust->setDestroyTime(0.7F);
 
-	netherrackCrushed = &registerBlock<BlockBaseFalling>("blockNetherrackCrushed", getNextBlockId());
+	netherrackCrushed = registerBlock<BlockBaseFalling>("blockNetherrackCrushed", getNextBlockId());
 	netherrackCrushed->setCategory(CreativeItemCategory::BLOCKS);
 	netherrackCrushed->setDestroyTime(0.7F);
 
-	endstoneCrushed = &registerBlock<BlockBaseFalling>("blockEndstoneCrushed", getNextBlockId());
+	endstoneCrushed = registerBlock<BlockBaseFalling>("blockEndstoneCrushed", getNextBlockId());
 	endstoneCrushed->setCategory(CreativeItemCategory::BLOCKS);
 	endstoneCrushed->setDestroyTime(0.7F);
 
-	barrelWood = &registerBlock<Block>("blockBarrel0", getNextBlockId(), Material::getMaterial(MaterialType::WOOD));
+	barrelWood = registerBlock<Block>("blockBarrel0", getNextBlockId(), Material::getMaterial(MaterialType::WOOD));
 	barrelWood->setCategory(CreativeItemCategory::BLOCKS);
 	//barrelWood->setDestroyTime(1.4f);
 	//barrelWood->setExplodeable(5.0f);
 
-	infestedLeaves = &registerBlock<BlockInfestedLeaves>("blockInfestedLeaves", getNextBlockId());
+	infestedLeaves = registerBlock<BlockInfestedLeaves>("blockInfestedLeaves", getNextBlockId());
 	infestedLeaves->setCategory(CreativeItemCategory::DECORATIONS);
 	BlockEntityRegistry::registerBlockEntity((BlockInfestedLeaves*)infestedLeaves, "InfestedLeaves");
 
-	crucible = &registerBlock<Block>("blockCrucible", getNextBlockId(), Material::getMaterial(MaterialType::STONE));
+	crucible = registerBlock<Block>("blockCrucible", getNextBlockId(), Material::getMaterial(MaterialType::STONE));
 	crucible->setCategory(CreativeItemCategory::BLOCKS);
 	//barrelWood->setDestroyTime(1.4f);
 	//barrelWood->setExplodeable(5.0f);

@@ -60,7 +60,8 @@ void ExNihiloPERecipes::pushIngredient(Item *item, char letter) {
 }
 
 void ExNihiloPERecipes::pushIngredient(Block *block, char letter) {
-	pushIngredient(block->blockId, 0, letter);
+	Recipes::Type type {NULL, block, ItemInstance(*block, 1, 0), letter};
+	_ingredients.push_back(type);
 }
 
 void ExNihiloPERecipes::pushIngredient(short id, short data, char letter) {
