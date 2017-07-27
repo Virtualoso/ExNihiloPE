@@ -4,6 +4,7 @@
 
 enum class EntityEvent;
 class StructureFeature;
+class ClientInstance;
 
 class LocalPlayer : public Player {
 public:
@@ -93,4 +94,5 @@ public:
 	virtual bool isTeacher() const;
 	virtual void chorusFruitTeleport();
 	
+	ClientInstance* getClientInstance() const;
 };

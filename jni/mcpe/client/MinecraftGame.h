@@ -24,6 +24,7 @@ namespace Social {
 class Player;
 class VoiceSystem;
 class Timer;
+class Font;
 class DirectionId;
 class Entity;
 class TextureData;
@@ -55,6 +56,7 @@ public:
 
 	// non virtual
 	MinecraftGame(int, char**);
+	void onTick();
 	Options* getOptions();
 	Minecraft* getServer();
 	void* getHoloInput() const;

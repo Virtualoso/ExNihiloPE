@@ -6,6 +6,7 @@
 #include "BlockEntityType.h"
 #include "../../level/BlockPos.h"
 #include "../../math/AABB.h"
+#include "../../packet/BlockEntityDataPacket.h"
 
 
 class Block;
@@ -53,7 +54,7 @@ public:
 	virtual void onChanged(BlockSource&);
 	virtual bool isMovable();
 	virtual bool isCustomNameSaved();
-	virtual void* getUpdatePacket(BlockSource&);
+	virtual BlockEntityDataPacket* getUpdatePacket(BlockSource&);
 	virtual void onPlace(BlockSource&);
 	virtual void onUpdatePacket(CompoundTag const&, BlockSource&);
 	virtual void onMove();

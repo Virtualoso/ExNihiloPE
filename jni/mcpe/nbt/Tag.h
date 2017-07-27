@@ -25,7 +25,7 @@ public:
 	virtual void load(IDataInput&)=0;
 	virtual std::string toString() const=0;
 	virtual int getId() const=0;
-	virtual bool equals(Tag const&) const=0;
+	virtual bool equals(Tag const&) const;
 	virtual void print(PrintStream&) const;
 	virtual void print(std::string const&, PrintStream&) const;
 	virtual void setName(std::string const&);

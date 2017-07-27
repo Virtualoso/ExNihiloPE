@@ -8,7 +8,7 @@ class IDataInput;
 class NamedTag
 {
 public:
-	//char filler_NamedTag[UNKNOW_SIZE];
+	char filler_NamedTag[4]; // 4
 public:
 	virtual ~NamedTag();
 	virtual void write(IDataOutput&) const=0;

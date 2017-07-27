@@ -1,14 +1,16 @@
 #pragma once
 
+#include <memory>
+
 #include "Tag.h"
 #include "NamedTag.h"
 
 class TagMemoryChunk;
 
-class CompoundTag : public Tag
+class CompoundTag : public NamedTag
 {
 public:
-	char filler_CompoundTag[5000];
+	char filler_CompoundTag[28];
 public:
 	virtual ~CompoundTag();
 	virtual void write(IDataOutput&) const;

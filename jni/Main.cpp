@@ -13,6 +13,8 @@
 #include "mcpe/item/Item.h"
 #include "mcpe/level/BlockPos.h"
 #include "mcpe/block/entity/BlockEntityFactory.h"
+#include "mcpe/client/MinecraftGame.h"
+#include "mcpe/client/gui/GuiData.h"
 
 #include "exnihilope/ExNihiloPE.h"
 #include "exnihilope/items/ENItems.h"
@@ -22,6 +24,7 @@
 #include "exnihilope/handlers/HandlerCrook.h"
 #include "exnihilope/blockentity/BlockEntityRegistry.h"
 #include "exnihilope/blockentity/BlockEntityBase.h"
+#include "exnihilope/blockentity/BlockEntityInfestedLeaves.h"
 
 #define LOG_TAG "ExNihilo-PE"
 #define LOG(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
@@ -127,6 +130,12 @@ std::unique_ptr<BlockEntity> BlockEntityFactory$createBlockEntity(BlockEntityTyp
 	return retval;
 }
 
+void (*_MinecraftGame$onPlayerLoaded)(MinecraftGame*, Player&);
+void MinecraftGame$onPlayerLoaded(MinecraftGame* self, Player& player) {
+	_MinecraftGame$onPlayerLoaded(self, player);
+	BlockEntityInfestedLeaves::guiData = self->getGuiData();
+}
+
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)  {
 	LOG("Function Hooking Started");
@@ -141,6 +150,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)  {
 	MSHookFunction((void*) &Localization::loadFromResourcePackManager, (void*) &Localization$loadFromResourcePackManager, (void**) &_Localization$loadFromResourcePackManager);
 	MSHookFunction((void*) &Block::playerDestroy, (void*) &Block$playerDestroy, (void**) &Block$_playerDestroy);
 	MSHookFunction((void*) &BlockEntityFactory::createBlockEntity, (void*) &BlockEntityFactory$createBlockEntity, (void**) &_BlockEntityFactory$createBlockEntity);
+	MSHookFunction((void*) &MinecraftGame::onPlayerLoaded, (void*) &MinecraftGame$onPlayerLoaded, (void**) &_MinecraftGame$onPlayerLoaded);
 
 	return JNI_VERSION_1_6;
 }

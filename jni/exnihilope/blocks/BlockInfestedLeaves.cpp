@@ -7,6 +7,9 @@
 #include "mcpe/level/BlockSource.h"
 #include "mcpe/item/Item.h"
 #include "mcpe/player/Player.h"
+#include "mcpe/player/LocalPlayer.h"
+#include "mcpe/client/ClientInstance.h"
+#include "mcpe/client/gui/GuiData.h"
 #include "mcpe/level/Level.h"
 #include "mcpe/block/Block.h"
 
@@ -67,6 +70,11 @@ void BlockInfestedLeaves::playerDestroy(Player* harvester, const BlockPos& pos, 
 		
 		//block entity stuff here eventually
 	}
+}
+
+bool BlockInfestedLeaves::use(Player& player, const BlockPos& pos) const {
+	Block::use(player, pos);
+	((BlockEntityInfestedLeaves*) player.getRegion()->getBlockEntity(pos))->upCounter();
 }
 
 std::unique_ptr<BlockEntity> BlockInfestedLeaves::createBlockEntity(const BlockPos& pos) {
